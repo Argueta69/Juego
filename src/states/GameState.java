@@ -240,7 +240,7 @@ public class GameState extends State {
                 backgroundMusic.stop();
                 
                 //Una vez muertos cambaimos el State
-                State.changeState(new MenuState());
+                //State.changeState(new MenuState());
 
             }
 

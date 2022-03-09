@@ -44,7 +44,7 @@ public class LoadingState extends State{
         //si ha finalizado la carga de recursos
         if(Assets.loaded){
             //Vamos al estado del juego de menu
-            State.changeState(new MenuState());
+            State.changeState(new GameState());
             try {
                 //Finalizamod el hilo de carga de recursos
                 loadingThread.join();
