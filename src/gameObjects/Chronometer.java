@@ -7,7 +7,7 @@ package gameObjects;
 
 /**
  *
- * @author argue
+ * @author fjchaparro
  */
 public class Chronometer {
     //Inicio del cronómetro y tiempo actual para saber cuáto tiempo
