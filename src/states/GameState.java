@@ -30,7 +30,7 @@ import math.Vector2D;
  *
  * @author argue
  *
- * Clase para gestionar el estado principal del juego
+ * Clase para gestionar el estado principal del juego hola bb
  */
 public class GameState extends State {
 
