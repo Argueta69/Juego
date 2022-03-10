@@ -34,7 +34,7 @@ public class Enemy extends MovingObjetcs {
 
     @Override
     public void autoDestroy() {
-        super.destroy();
+        super.autoDestroy();
     }
 
     @Override
