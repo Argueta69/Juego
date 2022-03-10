@@ -13,16 +13,17 @@ import javax.swing.JOptionPane;
  * @author argue
  */
 public class Main extends javax.swing.JFrame {
-    
+
     ConectorBBDD c;
+
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
-        setSize(640, 480);
+        setSize(639, 453);
         this.setLocationRelativeTo(null);
-        c=new ConectorBBDD();
+        c = new ConectorBBDD();
         c.getConexion();
     }
 
@@ -67,11 +68,11 @@ public class Main extends javax.swing.JFrame {
                 SalirMouseExited(evt);
             }
         });
-        jPanelAcceso.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 20, 30));
+        jPanelAcceso.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 20, 30));
 
         jLabel2.setFont(new java.awt.Font("Stencil Std", 0, 18)); // NOI18N
         jLabel2.setText("Usuario:");
-        jPanelAcceso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
+        jPanelAcceso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 174, -1, 30));
 
         jUser.setBackground(new java.awt.Color(255, 255, 0));
         jPanelAcceso.add(jUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 182, 37));
@@ -87,11 +88,14 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Stencil Std", 0, 18)); // NOI18N
         jLabel1.setText("Contraseña:");
-        jPanelAcceso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        jPanelAcceso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 234, -1, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
         jButton1.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
         jButton1.setText("Regístrate");
+        jButton1.setMaximumSize(new java.awt.Dimension(86, 36));
+        jButton1.setMinimumSize(new java.awt.Dimension(86, 36));
+        jButton1.setPreferredSize(new java.awt.Dimension(86, 36));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton1MouseEntered(evt);
@@ -105,7 +109,7 @@ public class Main extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanelAcceso.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 190, 60));
+        jPanelAcceso.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 160, 50));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/logo_transparent.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -114,6 +118,9 @@ public class Main extends javax.swing.JFrame {
         btnEntrar.setBackground(new java.awt.Color(255, 51, 51));
         btnEntrar.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
         btnEntrar.setText("Entra");
+        btnEntrar.setMaximumSize(new java.awt.Dimension(86, 36));
+        btnEntrar.setMinimumSize(new java.awt.Dimension(86, 36));
+        btnEntrar.setPreferredSize(new java.awt.Dimension(86, 36));
         btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEntrarMouseEntered(evt);
@@ -127,27 +134,21 @@ public class Main extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
-        jPanelAcceso.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 180, 60));
+        jPanelAcceso.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 160, 50));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/fondoMenu.png"))); // NOI18N
         jLabel4.setPreferredSize(new java.awt.Dimension(800, 600));
-        jPanelAcceso.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 680, 470));
+        jPanelAcceso.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+            .addComponent(jPanelAcceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanelAcceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         pack();
@@ -163,7 +164,7 @@ public class Main extends javax.swing.JFrame {
 
         } else {
             c.accesoLogin(this, jPassword, jUser);
-           
+
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -174,7 +175,7 @@ public class Main extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Registro registro=new Registro();
+        Registro registro = new Registro();
         registro.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -186,7 +187,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
         // TODO add your handling code here:
-        jButton1.setBackground(new Color(255,51,51));
+        jButton1.setBackground(new Color(255, 51, 51));
         jButton1.setForeground(Color.white);
     }//GEN-LAST:event_jButton1MouseExited
 
@@ -198,25 +199,25 @@ public class Main extends javax.swing.JFrame {
 
     private void btnEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseExited
         // TODO add your handling code here:
-        btnEntrar.setBackground(new Color(255,51,51));
+        btnEntrar.setBackground(new Color(255, 51, 51));
         btnEntrar.setForeground(Color.white);
     }//GEN-LAST:event_btnEntrarMouseExited
 
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
-        int ventanaYesNotCancel = (JOptionPane.showConfirmDialog(null,"Quieres salir?","Salir de JumpWalker", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE));
+        int ventanaYesNotCancel = (JOptionPane.showConfirmDialog(null, "Quieres salir?", "Salir de JumpWalker", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE));
 
         switch (ventanaYesNotCancel) {
             case 0:
-            dispose();
-            break;
+                dispose();
+                break;
             case 1:
 
-            break;
+                break;
             case 2:
 
-            break;
+                break;
             default:
-            break;
+                break;
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_SalirMouseClicked
@@ -229,8 +230,6 @@ public class Main extends javax.swing.JFrame {
         Salir.setForeground(Color.white);        // TODO add your handling code here:
     }//GEN-LAST:event_SalirMouseExited
 
-    
-    
     /**
      * @param args the command line arguments
      */

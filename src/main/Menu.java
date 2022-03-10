@@ -66,26 +66,21 @@ public class Menu extends javax.swing.JFrame {
 
         jlOpciones.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlOpciones.setForeground(new java.awt.Color(255, 255, 255));
-        jlOpciones.setText("OPCIONES");
+        jlOpciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlOpciones.setText("PUNTUACIONES");
 
         javax.swing.GroupLayout jpOptionsLayout = new javax.swing.GroupLayout(jpOptions);
         jpOptions.setLayout(jpOptionsLayout);
         jpOptionsLayout.setHorizontalGroup(
             jpOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpOptionsLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jlOpciones)
-                .addContainerGap(22, Short.MAX_VALUE))
+            .addComponent(jlOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
         jpOptionsLayout.setVerticalGroup(
             jpOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpOptionsLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jlOpciones)
-                .addContainerGap())
+            .addComponent(jlOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel.add(jpOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, 140, 50));
+        jPanel.add(jpOptions, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, 180, 50));
 
         jpControls.setBackground(new java.awt.Color(255, 51, 51));
         jpControls.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,26 +97,21 @@ public class Menu extends javax.swing.JFrame {
 
         jlControles.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlControles.setForeground(new java.awt.Color(255, 255, 255));
+        jlControles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlControles.setText("CONTROLES");
 
         javax.swing.GroupLayout jpControlsLayout = new javax.swing.GroupLayout(jpControls);
         jpControls.setLayout(jpControlsLayout);
         jpControlsLayout.setHorizontalGroup(
             jpControlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpControlsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlControles)
-                .addGap(19, 19, 19))
+            .addComponent(jlControles, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
         jpControlsLayout.setVerticalGroup(
             jpControlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpControlsLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jlControles)
-                .addContainerGap())
+            .addComponent(jlControles, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel.add(jpControls, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 140, 50));
+        jPanel.add(jpControls, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, 180, 50));
 
         jpGame.setBackground(new java.awt.Color(255, 51, 51));
         jpGame.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -139,26 +129,21 @@ public class Menu extends javax.swing.JFrame {
         jlJugar.setBackground(new java.awt.Color(255, 255, 255));
         jlJugar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlJugar.setForeground(new java.awt.Color(255, 255, 255));
+        jlJugar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlJugar.setText("JUGAR");
 
         javax.swing.GroupLayout jpGameLayout = new javax.swing.GroupLayout(jpGame);
         jpGame.setLayout(jpGameLayout);
         jpGameLayout.setHorizontalGroup(
             jpGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpGameLayout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addComponent(jlJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+            .addComponent(jlJugar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
         jpGameLayout.setVerticalGroup(
             jpGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpGameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlJugar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jlJugar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel.add(jpGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 140, 50));
+        jPanel.add(jpGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 270, 180, 50));
 
         jpGoOut.setBackground(new java.awt.Color(255, 51, 51));
         jpGoOut.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,35 +160,30 @@ public class Menu extends javax.swing.JFrame {
 
         jlSalir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jlSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlSalir.setText("SALIR");
 
         javax.swing.GroupLayout jpGoOutLayout = new javax.swing.GroupLayout(jpGoOut);
         jpGoOut.setLayout(jpGoOutLayout);
         jpGoOutLayout.setHorizontalGroup(
             jpGoOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpGoOutLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jlSalir)
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addComponent(jlSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
         jpGoOutLayout.setVerticalGroup(
             jpGoOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpGoOutLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlSalir)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(jlSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel.add(jpGoOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 450, -1, -1));
+        jPanel.add(jpGoOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 530, 180, 50));
 
-        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/menu.jpeg"))); // NOI18N
-        jPanel.add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 690));
+        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/menu.png"))); // NOI18N
+        jPanel.add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

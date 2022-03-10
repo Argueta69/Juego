@@ -13,14 +13,17 @@ import javax.swing.JOptionPane;
  * @author argue
  */
 public class Registro extends javax.swing.JFrame {
+
     ConectorBBDD c;
+
     /**
      * Creates new form Registro
      */
     public Registro() {
         initComponents();
         this.setLocationRelativeTo(null);
-        c=new ConectorBBDD();
+        setSize(639, 453);
+        c = new ConectorBBDD();
         c.getConexion();
     }
 
@@ -65,14 +68,14 @@ public class Registro extends javax.swing.JFrame {
                 SalirMouseExited(evt);
             }
         });
-        jPanelAcceso.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 20, 30));
+        jPanelAcceso.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 20, 30));
 
         jLabel2.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
         jLabel2.setText("Usuario:");
-        jPanelAcceso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, -1));
+        jPanelAcceso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, 30));
 
         jUser.setBackground(new java.awt.Color(255, 255, 0));
-        jPanelAcceso.add(jUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 249, 30));
+        jPanelAcceso.add(jUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 249, 30));
 
         jPassword.setBackground(new java.awt.Color(255, 255, 0));
         jPassword.setText("jPasswordField1");
@@ -81,11 +84,11 @@ public class Registro extends javax.swing.JFrame {
                 jPasswordActionPerformed(evt);
             }
         });
-        jPanelAcceso.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 249, 30));
+        jPanelAcceso.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 249, 30));
 
         jLabel1.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
         jLabel1.setText("Contraseña:");
-        jPanelAcceso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
+        jPanelAcceso.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 110, 30));
 
         btnRegistrar.setBackground(new java.awt.Color(255, 51, 51));
         btnRegistrar.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
@@ -103,7 +106,7 @@ public class Registro extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanelAcceso.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 353, 160, 50));
+        jPanelAcceso.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 160, 50));
 
         btnLogin.setBackground(new java.awt.Color(255, 51, 51));
         btnLogin.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
@@ -121,11 +124,11 @@ public class Registro extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanelAcceso.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 290, 160, 50));
+        jPanelAcceso.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 160, 50));
 
         jLabel4.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
         jLabel4.setText("Repetir Contra:");
-        jPanelAcceso.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        jPanelAcceso.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, 30));
 
         jPasswordR.setBackground(new java.awt.Color(255, 255, 0));
         jPasswordR.setText("jPasswordField1");
@@ -134,19 +137,17 @@ public class Registro extends javax.swing.JFrame {
                 jPasswordRActionPerformed(evt);
             }
         });
-        jPanelAcceso.add(jPasswordR, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 249, 30));
+        jPanelAcceso.add(jPasswordR, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 249, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/fondoMenu.png"))); // NOI18N
         jLabel5.setPreferredSize(new java.awt.Dimension(800, 600));
-        jPanelAcceso.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 670, 470));
+        jPanelAcceso.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE))
+            .addComponent(jPanelAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +166,7 @@ public class Registro extends javax.swing.JFrame {
         jPassword.setText("");
         jPasswordR.setText("");
     }
-    
+
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
         String password = String.valueOf(jPassword.getPassword());
@@ -188,7 +189,7 @@ public class Registro extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Main main=new Main();
+        Main main = new Main();
         main.setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -204,37 +205,37 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
         // TODO add your handling code here:
-        btnLogin.setBackground(new Color(255,51,51));
+        btnLogin.setBackground(new Color(255, 51, 51));
         btnLogin.setForeground(Color.white);
     }//GEN-LAST:event_btnLoginMouseExited
 
     private void btnRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseEntered
         // TODO add your handling code here:
-         btnRegistrar.setBackground(Color.black);
+        btnRegistrar.setBackground(Color.black);
         btnRegistrar.setForeground(Color.white);
     }//GEN-LAST:event_btnRegistrarMouseEntered
 
     private void btnRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseExited
         // TODO add your handling code here:
-             btnRegistrar.setBackground(new Color(255,51,51));
+        btnRegistrar.setBackground(new Color(255, 51, 51));
         btnRegistrar.setForeground(Color.white);
     }//GEN-LAST:event_btnRegistrarMouseExited
 
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
-        int ventanaYesNotCancel = (JOptionPane.showConfirmDialog(null,"Quieres salir?","Salir de JumpWalker", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE));
+        int ventanaYesNotCancel = (JOptionPane.showConfirmDialog(null, "Quieres salir?", "Salir de JumpWalker", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE));
 
         switch (ventanaYesNotCancel) {
             case 0:
-            dispose();
-            break;
+                dispose();
+                break;
             case 1:
 
-            break;
+                break;
             case 2:
 
-            break;
+                break;
             default:
-            break;
+                break;
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_SalirMouseClicked

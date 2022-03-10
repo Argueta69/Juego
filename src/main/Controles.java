@@ -31,7 +31,7 @@ public class Controles extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        Salir = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,21 +44,23 @@ public class Controles extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Salir.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        Salir.setForeground(new java.awt.Color(255, 255, 255));
-        Salir.setText("X");
-        Salir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SalirMouseClicked(evt);
-            }
+        btnLogin.setBackground(new java.awt.Color(255, 51, 51));
+        btnLogin.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
+        btnLogin.setText("Volver");
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                SalirMouseEntered(evt);
+                btnLoginMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                SalirMouseExited(evt);
+                btnLoginMouseExited(evt);
             }
         });
-        jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 20, 20, 30));
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 640, 160, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/pantControls.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -77,24 +79,27 @@ public class Controles extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
-        Menu menu=new Menu();
-        menu.setVisible(true);
-        dispose();
-
+    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_SalirMouseClicked
+        btnLogin.setBackground(Color.black);
+        btnLogin.setForeground(Color.white);
+    }//GEN-LAST:event_btnLoginMouseEntered
 
-    private void SalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseEntered
-        Salir.setForeground(Color.BLACK);        // TODO add your handling code here:
-    }//GEN-LAST:event_SalirMouseEntered
+    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
+        // TODO add your handling code here:
+        btnLogin.setBackground(new Color(255, 51, 51));
+        btnLogin.setForeground(Color.white);
+    }//GEN-LAST:event_btnLoginMouseExited
 
-    private void SalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseExited
-        Salir.setForeground(Color.white);        // TODO add your handling code here:
-    }//GEN-LAST:event_SalirMouseExited
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        Menu menu = new Menu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Salir;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
