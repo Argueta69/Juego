@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,48 +14,40 @@ import states.GameState;
  *
  * @author argue
  */
-public class Enemy extends MovingObjetcs{
+public class Enemy extends MovingObjetcs {
 
     //Contructor enemigo
     public Enemy(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVel, texture, gameState);
     }
-    
-    
+
     @Override
-    public void update(){
-        position=position.add(velocity);
-        
-        if(position.getX()> Constants.WIDTH){
-            position.setX(-width);
-        }
-        
-         if(position.getY()>Constants.HEIGHT){
-            position.setY(-height);
-        }
-        
-        if(position.getX()<-width){
-             position.setX(Constants.WIDTH);
+    public void update() {
+        position = position.add(velocity);
+
+        // Si el enemigo desaparece por la izquierda de la pantalla, lo eliminamos.
+        if (position.getX() < 0 - width) {
+            autoDestroy();
         }
 
-        if(position.getY()< -height){
-             position.setY(Constants.HEIGHT);
-        }
-        
-        angle+=Constants.DELTAANGLE/2;
     }
-    
+
     @Override
-    public void destroy(){
-        //Incrementamos la puntuación del jugador por eliminar un Meteor
-        gameState.addScore(Constants.UFO_SCORE,position);
+    public void autoDestroy() {
         super.destroy();
     }
-        
+
     @Override
-    public void draw(Graphics g){
+    public void destroy() {
+        //Incrementamos la puntuación del jugador por eliminar un Meteor
+        gameState.addScore(Constants.UFO_SCORE, position);
+        super.destroy();
+    }
+
+    @Override
+    public void draw(Graphics g) {
         //Pintamos el enemigo
-        g.drawImage(texture, (int)position.getX(), (int)position.getY(), null);
+        g.drawImage(texture, (int) position.getX(), (int) position.getY(), null);
     }
 
 }

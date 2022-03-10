@@ -18,8 +18,8 @@ import states.GameState;
  *
  * @author argue
  */
-public class MovingObjetcs extends GameObject{
-    
+public class MovingObjetcs extends GameObject {
+
     //Velocidad del objeto
     protected Vector2D velocity;
     //Rotación del obejto
@@ -29,25 +29,25 @@ public class MovingObjetcs extends GameObject{
     //Representa la velocidad maxima de todos los objetos movibles
     protected double maxVel;
     //Variables que nos indican el ancho y el alto del objeto
-    protected int width,height;
-        
+    protected int width, height;
+
     //Atributo gameState para acceder al array de objetos moviles.
     protected GameState gameState;
-    
+
     //Cargamos sonido de la explosion
     private Sound explosion;
-    
+
     //Constructor de obejtos movibles
-    public MovingObjetcs(Vector2D position,Vector2D velocity,double maxVel, BufferedImage texture, GameState gameState) {
+    public MovingObjetcs(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, texture);
-        this.velocity=velocity;
-        this.angle=0;
-        this.maxVel=maxVel;
-        width=texture.getWidth();
-        height=texture.getHeight();
-        this.gameState=gameState;
+        this.velocity = velocity;
+        this.angle = 0;
+        this.maxVel = maxVel;
+        width = texture.getWidth();
+        height = texture.getHeight();
+        this.gameState = gameState;
         explosion = new Sound(Assets.explosion);
-        
+
     }
 
     @Override
@@ -57,12 +57,12 @@ public class MovingObjetcs extends GameObject{
     @Override
     public void draw(Graphics g) {
     }
-    
+
     //Obtenemos el centro de la nave, utilizado para disparar y colisiones
     protected Vector2D getCenter() {
         return new Vector2D(position.getX() + width / 2, position.getY() + height / 2);
     }
-    
+
     //Método de detección de colisiones
     protected void collideWith() {
         //Recuperamos el array de objetos movibles
@@ -88,31 +88,31 @@ public class MovingObjetcs extends GameObject{
             }
         }
     }
-    
+
     //Control de colisiones, destrucción de objetos colisionados
-    private void objectCollision(MovingObjetcs a, MovingObjetcs b){
-        
-         //Si el obejto a es de tipo jugador y reapareciendo no colisionamos
-        if(a instanceof Player && ((Player) a).isSpawning()){
+    private void objectCollision(MovingObjetcs a, MovingObjetcs b) {
+
+        //Si el obejto a es de tipo jugador y reapareciendo no colisionamos
+        if (a instanceof Player && ((Player) a).isSpawning()) {
             return;
         }
-        
-        if(b instanceof Player && ((Player) b).isSpawning()){
+
+        if (b instanceof Player && ((Player) b).isSpawning()) {
             return;
         }
-        
-        if(a instanceof Player && (b instanceof Knife)){
+
+        if (a instanceof Player && (b instanceof Knife)) {
             return;
         }
-        if(b instanceof Player && (a instanceof Knife)){
+        if (b instanceof Player && (a instanceof Knife)) {
             return;
         }
         //Si ninguno son Meteor los eliminamos
-        if(!(a instanceof Enemy && b instanceof Enemy)){
-                     
+        if (!(a instanceof Enemy && b instanceof Enemy)) {
+
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -126,5 +126,10 @@ public class MovingObjetcs extends GameObject{
             explosion.play();
         }
     }
-    
+
+    // Destruimos el enemigo cuando sale fuera de la pantalla.
+    protected void autoDestroy() {
+        gameState.getMovingObjetcs().remove(this);
+    }
+
 }

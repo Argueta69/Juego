@@ -210,18 +210,12 @@ public class Player extends MovingObjetcs {
 
             if (izquierda && (!disparo)) {
                 g2d.drawImage(Assets.player2, at, null);
-                System.out.println("Izquierda");
-
             } else if (izquierda && disparo) {
                 g2d.drawImage(Assets.playerDisparoIzquierda, at, null);
-                System.out.println("Izquierda y disparo");
             } else if (disparo && (!izquierda)) {
                 g2d.drawImage(Assets.playerDisparoDerecha, at, null);
-                System.out.println("Derecha y disparo");
             } else if (!izquierda) {
                 g2d.drawImage(Assets.player1, at, null);
-                System.out.println("Derecha");
-
             }
         }
         //g.drawImage(texture, (int)position.getX(), (int)position.getY(), null);
