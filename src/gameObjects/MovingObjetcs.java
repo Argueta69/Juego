@@ -107,13 +107,24 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof Player && (a instanceof Knife)) {
             return;
         }
-        //Si ninguno son Meteor los eliminamos
-        if (!(a instanceof Enemy && b instanceof Enemy)) {
-
+        //Si ninguno son Zombies, eliminamos 
+        if(a instanceof Zombie || b instanceof Zombie){
+                     
+            //Reproducimos la animación de explosión
+            gameState.playBlood(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        
+        //Si ninguno son Robots, eliminamos 
+        if(a instanceof Robot || b instanceof Robot){
+                     
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-
-            //Elimamos los objetos colisionamos
+            
+            //Eliminamos los objetos colisionamos
             a.destroy();
             b.destroy();
         }

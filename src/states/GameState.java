@@ -7,10 +7,11 @@ package states;
 
 import gameObjects.Chronometer;
 import gameObjects.Constants;
-import gameObjects.Enemy;
 import gameObjects.Message;
 import gameObjects.MovingObjetcs;
 import gameObjects.Player;
+import gameObjects.Robot;
+import gameObjects.Zombie;
 import graphics.Animation;
 import graphics.Assets;
 import graphics.Sound;
@@ -41,6 +42,8 @@ public class GameState extends State {
 
     //Array de objetos de animación
     private ArrayList<Animation> explosions = new ArrayList<Animation>();
+
+    private ArrayList<Animation> blood = new ArrayList<Animation>();
 
     //Puntuación del jugador
     private int score = 0;
@@ -82,32 +85,29 @@ public class GameState extends State {
             up.play();
         }
         Random random = new Random();
-       
-        int numero = (int)(Math.random()*2+1);
+
+        int numero = (int) (Math.random() * 2 + 1);
         //Pintamos los enemugos y los añadimos al array de movingObject
         int x = 1300, y = 530;
-        if(numero==1){
-            
-        for (int i = 0; i < 2; i++) {
+        if (numero == 1) {
 
-            Enemy e = new Enemy(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.robot, this);
-            x += 150;
-            movingObject.add(e);
-         
-        }
-        }else if(numero==2){
-           
-           
-        for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++) {
 
-            Enemy e = new Enemy(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.zombie, this);
-             x += 150;
-            movingObject.add(e);
-         
+                Zombie e = new Zombie(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.robot, this);
+                x += 150;
+                movingObject.add(e);
+
+            }
+        } else if (numero == 2) {
+
+            for (int i = 0; i < 2; i++) {
+
+                Robot e = new Robot(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.zombie, this);
+                x += 150;
+                movingObject.add(e);
+
+            }
         }
-        }
-        
-        
 
         level++;
     }
@@ -131,16 +131,23 @@ public class GameState extends State {
             }
         }
 
+        for (int i = 0; i < blood.size(); i++) {
+            Animation animation = blood.get(i);
+            animation.update();
+            if (!animation.isRunning()) {
+                blood.remove(animation);
+            }
+        }
+
         for (int i = 0; i < movingObject.size(); i++) {
             //Si hay meteoros, retornamos, no iniciamos oleada
-            if (movingObject.get(i) instanceof Enemy) {
+            if ((movingObject.get(i) instanceof Zombie) || ((movingObject.get(i) instanceof Zombie))) {
                 return;
             }
         }
 
         //Iniciamos oleada.
         //createEnemies();
-
     }
 
     //Dibujamos el objeto Graphics
@@ -166,6 +173,11 @@ public class GameState extends State {
             Animation animation = explosions.get(i);
             g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
         }
+        
+        for (int i = 0; i < blood.size(); i++) {
+                Animation animation = blood.get(i);
+                g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
+            }
         //Pintamos la puntuación
         drawScore(g);
         //Pintamos las vidas
@@ -179,6 +191,13 @@ public class GameState extends State {
         explosions.add(new Animation(Assets.arrayFramesExp,
                 50,
                 position.substract(new Vector2D(Assets.arrayFramesExp[0].getWidth() / 2, Assets.arrayFramesExp[0].getHeight() / 2))));
+    }
+    
+    public void playBlood(Vector2D position) {
+        blood.add(new Animation(Assets.arrayFramesBlood,
+                50,
+                position.substract(new Vector2D(Assets.arrayFramesBlood[0].getWidth() / 2, Assets.arrayFramesBlood[0].getHeight() / 2))));
+       
     }
 
     //Retornamos un array de objetos moviles del juego
@@ -214,7 +233,7 @@ public class GameState extends State {
     }
 
     private void drawLives(Graphics g) {
-        
+
         //Posicion de las vidas
         Vector2D livePosition = new Vector2D(25, 25);
         g.drawImage(Assets.life, (int) livePosition.getX(), (int) livePosition.getY() - 10, null);
@@ -235,13 +254,12 @@ public class GameState extends State {
                 //Mostramos mensaje de nuevo nivel
                 messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
                         "GAME OVER ", Color.WHITE, true, Assets.fontBig, this));
-                
+
                 //Paramos la música al morir
                 backgroundMusic.stop();
-                
+
                 //Una vez muertos cambaimos el State
                 //State.changeState(new MenuState());
-
             }
 
             //dibujamos cada imagen correspondiente a cada número de vidas
@@ -249,7 +267,6 @@ public class GameState extends State {
         }
 
     }
-    
 
     //Resta una vida cuando eliminan al jugador
     public void subtractLife() {

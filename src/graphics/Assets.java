@@ -29,6 +29,8 @@ public class Assets {
     public static BufferedImage playerJump;
     public static BufferedImage playerSpawn;
     public static BufferedImage coin;
+    // sangrado
+    public static BufferedImage[] arrayFramesBlood = new BufferedImage[3];
     //Imagenes para los números para la vida y las puntuaciones
     public static BufferedImage[] numbers = new BufferedImage[11];
 
@@ -93,6 +95,11 @@ public class Assets {
         //Cargamos las imagenes de la explosión
         for (int i = 0; i < arrayFramesExp.length; i++) {
             arrayFramesExp[i] = loadImage("/explosion/" + i + ".png");
+        }
+        
+        //Cargamos las imagenes de la sangre
+        for (int i = 0; i < arrayFramesBlood.length; i++) {
+            arrayFramesBlood[i] = loadImage("/blood/" + i + ".png");
         }
 
         //Cargamos las imagenes de los números.
