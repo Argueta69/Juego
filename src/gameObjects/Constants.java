@@ -42,7 +42,7 @@ public class Constants {
     //Parpadeo al reaparecer
     public static final long FLICKER_TIME=200;
     //Tiempo al reaparecer
-    public static final long SPAWNING_TIME=3000;
+    public static final long SPAWNING_TIME=2000;
     //String de los botones
     public static final String PLAY="COMENZAR";
     public static final String EXIT="SALIR";

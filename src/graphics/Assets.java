@@ -27,6 +27,7 @@ public class Assets {
     public static BufferedImage playerDisparoDerecha;
     public static BufferedImage playerDisparoIzquierda;
     public static BufferedImage playerJump;
+    public static BufferedImage playerSpawn;
     public static BufferedImage coin;
     //Imagenes para los números para la vida y las puntuaciones
     public static BufferedImage[] numbers = new BufferedImage[11];
@@ -75,6 +76,7 @@ public class Assets {
         playerDisparoDerecha = loadImage("/ships/disparoDerecha.png");
         playerDisparoIzquierda = loadImage("/ships/disparoIzquierda.png");
         playerJump = loadImage("/ships/playerJump.png");
+        playerSpawn = loadImage("/ships/caida.png");
         coin = loadImage("/others/coin.png");
         
         //Enemigos

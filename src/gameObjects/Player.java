@@ -208,17 +208,25 @@ public class Player extends MovingObjetcs {
             g2d.drawImage(Assets.playerJump, at, null);
         } else {
 
-            if (izquierda && (!disparo)) {
+            if (izquierda && (!disparo) && (!spawning)) {
                 g2d.drawImage(Assets.player2, at, null);
+                System.out.println("Izquierda");
+            } else if (spawning) {
+                g2d.drawImage(Assets.playerSpawn, at, null);
             } else if (izquierda && disparo) {
                 g2d.drawImage(Assets.playerDisparoIzquierda, at, null);
+                System.out.println("Izquierda y disparo");
             } else if (disparo && (!izquierda)) {
                 g2d.drawImage(Assets.playerDisparoDerecha, at, null);
+                System.out.println("Derecha y disparo");
             } else if (!izquierda) {
                 g2d.drawImage(Assets.player1, at, null);
+                System.out.println("Derecha");
+
             }
         }
-        //g.drawImage(texture, (int)position.getX(), (int)position.getY(), null);
+
+    
     }
 
     @Override
@@ -239,7 +247,7 @@ public class Player extends MovingObjetcs {
     private void resetValues() {
         angle = 0;
         velocity = new Vector2D();
-        position = new Vector2D(Constants.WIDTH / 2 - Assets.player1.getWidth() / 2, Constants.HEIGHT / 2 - Assets.player1.getHeight() / 2);
+        position = new Vector2D(500, 5000);
     }
 
     //Metodo para no mostar el player
