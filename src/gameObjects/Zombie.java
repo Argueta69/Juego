@@ -24,23 +24,9 @@ public class Zombie extends MovingObjetcs{
     public void update(){
         position=position.add(velocity);
         
-        if(position.getX()> Constants.WIDTH){
-            position.setX(-width);
+        if(position.getX()<0-width){
+            autoDestroy();
         }
-        
-         if(position.getY()>Constants.HEIGHT){
-            position.setY(-height);
-        }
-        
-        if(position.getX()<-width){
-             position.setX(Constants.WIDTH);
-        }
-
-        if(position.getY()< -height){
-             position.setY(Constants.HEIGHT);
-        }
-        
-        angle+=Constants.DELTAANGLE/2;
     }
     
     @Override
@@ -54,6 +40,11 @@ public class Zombie extends MovingObjetcs{
     public void draw(Graphics g){
         //Pintamos el enemigo
         g.drawImage(texture, (int)position.getX(), (int)position.getY(), null);
+    }
+    
+    @Override
+    public void autoDestroy(){
+        super.destroy();
     }
     
 }
