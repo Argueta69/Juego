@@ -163,18 +163,26 @@ public class Player extends MovingObjetcs {
             heading = heading.setDirection(angle);
         }
 
-        //La velocidad es representada como el cambio de la posición respecto al tiempo.
+//La velocidad es representada como el cambio de la posición respecto al tiempo.
         //Cada fotograma, le sumamos el vector posicion el vector velocidad.
         position = position.add(velocity);
 
         if (position.getX() > Constants.WIDTH) {
             position.setX(0);
+
+            //cambiar de escenario.
+
+            gameState.pasardePantallaAdelante();
         }
         if (position.getY() > Constants.HEIGHT) {
             position.setY(0);
         }
         if (position.getX() < 0) {
-            position.setX(Constants.WIDTH);
+            position.setX(20);
+            //cambiar escenario atras
+
+//            GameState st = new GameState();
+//            st.pasardePantallaAtras();
         }
         if (position.getY() < 0) {
             position.setY(Constants.HEIGHT);
@@ -226,7 +234,6 @@ public class Player extends MovingObjetcs {
             }
         }
 
-    
     }
 
     @Override

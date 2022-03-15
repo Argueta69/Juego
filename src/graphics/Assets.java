@@ -55,16 +55,20 @@ public class Assets {
     public static Font fontMed;
 
     //Cargamos sonidos
-    public static Clip backgroundMusic, explosion, playerLoose, playerShoot, ufoShoot, upLevel;
+    public static Clip backgroundMusic, explosion, playerLoose, playerShoot, ufoShoot, upLevel, coinSound, liveSound;
 
     //Cargamos botones
     public static BufferedImage blueBtn;
     public static BufferedImage greyBtn;
-    
+
     //Imagen de fondo
-    public static  BufferedImage background;
-    public static  BufferedImage background2;
-    public static  BufferedImage pantalla_puntuacion;
+    public static BufferedImage background;
+    public static BufferedImage background2;
+    public static BufferedImage pantalla_puntuacion;
+    public static BufferedImage fase2;
+    public static BufferedImage fase3;
+    public static BufferedImage fase4;
+    public static BufferedImage fase5;
     //Atributos para controlar la carga de recursos
     //Indica si hemos terminado la carga de recursos
     public static boolean loaded = false;
@@ -85,11 +89,11 @@ public class Assets {
         playerJump = loadImage("/ships/playerJump.png");
         playerSpawn = loadImage("/ships/caida.png");
         coin = loadImage("/others/coin.png");
-        
+
         //Enemigos
         robot = loadImage("/enemys/robot.png");
         zombie = loadImage("/enemys/zombie.png");
-        
+
         //Cargamos en el obejto speed la imagen de la propulsión
         speed = loadImage("/effects/fire08.png");
         //Cargamos la imagen de los disparos
@@ -105,7 +109,7 @@ public class Assets {
         for (int i = 0; i < arrayFramesExp.length; i++) {
             arrayFramesExp[i] = loadImage("/explosion/" + i + ".png");
         }
-        
+
         //Cargamos las imagenes de la sangre
         for (int i = 0; i < arrayFramesBlood.length; i++) {
             arrayFramesBlood[i] = loadImage("/blood/" + i + ".png");
@@ -130,12 +134,18 @@ public class Assets {
         playerShoot = loadSound("/sounds/playerShoot.wav");
         ufoShoot = loadSound("/sounds/ufoShoot.wav");
         upLevel = loadSound("/sounds/upLevel.wav");
+        coinSound = loadSound("/sounds/coin.wav");
+        liveSound = loadSound("/sounds/lives.wav");
 
         blueBtn = loadImage("/ui/blue_button.png");
         greyBtn = loadImage("/ui/grey_button.png");
-        
-        background=loadImage("/background/fondo.jpg");
-        background2=loadImage("/background/fondo2.jpg");
+
+        background = loadImage("/background/fondo.jpg");
+        background2 = loadImage("/background/fondo2.jpg");
+        fase2 = loadImage("/background/fase2.jpg");
+        fase3 = loadImage("/background/fase3.jpg");
+        fase4 = loadImage("/background/fase4.jpg");
+        fase5 = loadImage("/background/fase5.jpg");
 
         //Carga finalizada
         loaded = true;

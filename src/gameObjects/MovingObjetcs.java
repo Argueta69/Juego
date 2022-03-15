@@ -37,6 +37,9 @@ public class MovingObjetcs extends GameObject {
     //Cargamos sonido de la explosion
     private Sound explosion;
 
+    private Sound coin;
+    private Sound live;
+
     //Constructor de obejtos movibles
     public MovingObjetcs(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, texture);
@@ -121,33 +124,48 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof Robot && (a instanceof ShootRobot)) {
             return;
         }
+
+        if (a instanceof Lives || b instanceof Lives) {
+            gameState.addLives();
+            live = new Sound(Assets.liveSound);
+            live.changeVolume(-10.0f);
+            live.play();
+            a.destroy();
+        }
+
+        if (a instanceof Coin || b instanceof Coin) {
+            gameState.addPoints();
+            coin = new Sound(Assets.coinSound);
+            coin.play();
+            a.destroy();
+        }
         //Si ninguno son Zombies, eliminamos 
-        if(a instanceof Zombie || b instanceof Zombie){
-                     
+        if (a instanceof Zombie || b instanceof Zombie) {
+
             //Reproducimos la animación de explosión
             gameState.playBlood(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
         }
-        
+
         //Si ninguno son Robots, eliminamos 
-        if(a instanceof Robot || b instanceof Robot){
-                     
+        if (a instanceof Robot || b instanceof Robot) {
+
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Eliminamos los objetos colisionamos
             a.destroy();
             b.destroy();
         }
-        
+
         //Colisiones disparos Zombie
         if (a instanceof ShootZombie && (b instanceof Knife)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -155,7 +173,7 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof ShootZombie && (a instanceof Knife)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -164,7 +182,7 @@ public class MovingObjetcs extends GameObject {
         if (a instanceof ShootRobot && (b instanceof Knife)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -172,18 +190,18 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof ShootRobot && (a instanceof Knife)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
         }
-        
+
         //Colisiones muerte disparo Zombie a Player
         //Colisiones disparos 
         if (a instanceof ShootZombie && (b instanceof Player)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -191,7 +209,7 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof ShootZombie && (a instanceof Player)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -201,7 +219,7 @@ public class MovingObjetcs extends GameObject {
         if (a instanceof ShootRobot && (b instanceof Player)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -209,13 +227,12 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof ShootRobot && (a instanceof Player)) {
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-            
+
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
         }
-        
-       
+
     }
 
     protected void destroy() {

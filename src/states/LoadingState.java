@@ -92,11 +92,11 @@ public class LoadingState extends State{
                 Constants.LOADING_BAR_HEIGHT);
 
         //Pintamos los textos de nuestra pantalla de cargando
-        Text.drawText(g2d, "Jump Walker Game",
-                new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2 - 50), true, Color.WHITE, font);
-
-        Text.drawText(g2d, "Cargando...",
-                new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2 + 20), true, Color.WHITE, font);
+        Text.drawText(g2d,"JumpWalker (Nexus Games)",
+                new Vector2D(Constants.WIDTH/2, Constants.HEIGHT/2-50),true,Color.WHITE,font);
+        
+        Text.drawText(g2d,"Cargando...",
+                new Vector2D(Constants.WIDTH/2, Constants.HEIGHT/2+20),true,Color.WHITE,font);
         
          
     }

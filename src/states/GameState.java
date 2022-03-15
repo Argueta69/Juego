@@ -6,7 +6,9 @@
 package states;
 
 import gameObjects.Chronometer;
+import gameObjects.Coin;
 import gameObjects.Constants;
+import gameObjects.Lives;
 import gameObjects.Message;
 import gameObjects.MovingObjetcs;
 import gameObjects.Player;
@@ -25,6 +27,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import main.Menu;
 import math.Vector2D;
 
 /**
@@ -56,13 +59,14 @@ public class GameState extends State {
     //Música de fondo
     private Sound backgroundMusic;
     private Sound up;
+    private long time, lastTime;
 
     //Constructor de la clase
     public GameState() {
         player = new Player(new Vector2D(100, 500), new Vector2D(0, 0), Constants.PLAYER_MAX_VEL, Assets.player1, this);
         movingObject.add(player);
-
         //Aumentamos el nivel
+        monedas();
         level++;
         createEnemies();
         //Cargamos sonido
@@ -73,12 +77,34 @@ public class GameState extends State {
 
     }
 
-    public void createEnemies() {
+    public void vidas() {
 
-        //Mostramos mensaje de nuevo nivel
+    }
+
+    public void monedas() {
+        time += System.currentTimeMillis() - lastTime;
+        lastTime = System.currentTimeMillis();
+        if(time==10){
+            drawCoins();
+        }
+       
+    }
+
+    public void drawLives() {
+
+        Lives l = new Lives(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.life, this);
+        movingObject.add(l);
+    }
+
+    public void drawCoins() {
+
+        Coin c = new Coin(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.coin, this);
+        movingObject.add(c);
+    }
+
+    public void createEnemies() {
         messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
                 "LEVEL " + level, Color.WHITE, true, Assets.fontBig, this));
-
         //Si nivel es mayor que uno cada vez que subamos se reproducira el sonido upLevel
         if (level > 1) {
             up = new Sound(Assets.upLevel);
@@ -108,7 +134,6 @@ public class GameState extends State {
 
             }
         }
-
         level++;
     }
 
@@ -150,6 +175,21 @@ public class GameState extends State {
         //createEnemies();
     }
 
+    public void pasardePantallaAdelante() {
+        //cambiar escenario atras
+//        level++;
+        if (Constants.NEXTPANTALLA < 6) {
+            messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
+                    "LEVEL " + level, Color.WHITE, true, Assets.fontBig, this));
+            createEnemies();
+            Constants.NEXTPANTALLA++;
+            level++;
+
+        } else {
+            Constants.NEXTPANTALLA = 1;
+        }
+    }
+
     //Dibujamos el objeto Graphics
     public void draw(Graphics g) {
 
@@ -157,8 +197,36 @@ public class GameState extends State {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
-        g2d.drawImage(Assets.background2, 0, 0, null);
+        g2d.drawImage(Assets.background, 0, 0, null);
 
+        //AQUI VA EL CAMBIO DE PANTALLA
+        if ((Constants.NEXTPANTALLA == 1)) {
+            System.out.println(Constants.NEXTPANTALLA);
+            g.drawImage(Assets.background2, 0, 0, null);
+
+        }
+
+        if ((Constants.NEXTPANTALLA == 2)) {
+            g.drawImage(Assets.fase2, 0, 0, null);
+
+        }
+
+        if ((Constants.NEXTPANTALLA == 3)) {
+
+            g.drawImage(Assets.fase3, 0, 0, null);
+
+        }
+
+        if ((Constants.NEXTPANTALLA == 4)) {
+            g.drawImage(Assets.fase4, 0, 0, null);
+
+        }
+        if ((Constants.NEXTPANTALLA == 5)) {
+            g.drawImage(Assets.fase5, 0, 0, null);
+
+        }
+
+        //
         //Pintamos los elementos del array
         for (int i = 0; i < movingObject.size(); i++) {
             movingObject.get(i).draw(g2d);
@@ -173,11 +241,11 @@ public class GameState extends State {
             Animation animation = explosions.get(i);
             g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
         }
-        
+
         for (int i = 0; i < blood.size(); i++) {
-                Animation animation = blood.get(i);
-                g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
-            }
+            Animation animation = blood.get(i);
+            g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
+        }
         //Pintamos la puntuación
         drawScore(g);
         //Pintamos las vidas
@@ -192,12 +260,12 @@ public class GameState extends State {
                 50,
                 position.substract(new Vector2D(Assets.arrayFramesExp[0].getWidth() / 2, Assets.arrayFramesExp[0].getHeight() / 2))));
     }
-    
+
     public void playBlood(Vector2D position) {
         blood.add(new Animation(Assets.arrayFramesBlood,
                 50,
                 position.substract(new Vector2D(Assets.arrayFramesBlood[0].getWidth() / 2, Assets.arrayFramesBlood[0].getHeight() / 2))));
-       
+
     }
 
     //Retornamos un array de objetos moviles del juego
@@ -257,7 +325,8 @@ public class GameState extends State {
 
                 //Paramos la música al morir
                 backgroundMusic.stop();
-
+                Menu menu = new Menu();
+                menu.setVisible(true);
                 //Una vez muertos cambaimos el State
                 //State.changeState(new MenuState());
             }
@@ -276,6 +345,18 @@ public class GameState extends State {
     //Retornamos el array de mensajes
     public ArrayList<Message> getMessages() {
         return messages;
+    }
+
+    public void addPoints() {
+
+        score += 20;
+
+    }
+
+    public void addLives() {
+
+        lives++;
+
     }
 
 }
