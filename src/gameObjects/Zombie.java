@@ -37,9 +37,6 @@ public class Zombie extends MovingObjetcs {
         lastTime = System.currentTimeMillis();
         position = position.add(velocity);
 
-        if (position.getX() < 0 - width) {
-            autoDestroy();
-        }
 
         
         if (time > Constants.FIRERATEZOMBIE) {
