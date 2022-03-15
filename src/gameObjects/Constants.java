@@ -49,4 +49,6 @@ public class Constants {
     //Tamaño barra de carga
     public static final int LOADING_BAR_WIDTH=500;
     public static final int LOADING_BAR_HEIGHT=50;
+    public static final int ID_ESTADO_JUEGO=0;
+    public static String NOMBRE_ESTADO_JUEGO="";
 }
