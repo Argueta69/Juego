@@ -19,7 +19,7 @@ public class Constants {
     public static final int FIRERATE=500;
     //Tiempo de disparo zombie
     public static final int FIRERATEZOMBIE=1500;
-    //Tiempo de disparo zombie
+    //Tiempo de disparo robot
     public static final int FIRERATEROBOT=1500;
     //angulo delta
     public static final double DELTAANGLE=0.1;
@@ -53,4 +53,6 @@ public class Constants {
     //Tamaño barra de carga
     public static final int LOADING_BAR_WIDTH=500;
     public static final int LOADING_BAR_HEIGHT=50;
+    public static final int ID_ESTADO_JUEGO=0;
+    public static String NOMBRE_ESTADO_JUEGO="";
 }
