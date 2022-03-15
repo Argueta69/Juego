@@ -9,12 +9,14 @@ import gameObjects.Constants;
 import graphics.Assets;
 import static graphics.Assets.fontMed;
 import static graphics.Assets.loadFont;
+import static graphics.Assets.loadImage;
 import graphics.Text;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import math.Vector2D;
@@ -24,17 +26,22 @@ import math.Vector2D;
  * @author argue
  */
 public class LoadingState extends State{
-   //Hilo de carga de recursos
+   
+    //Hilo de carga de recursos
     private Thread loadingThread;
 
     //Fuente del texto cargando
     private Font font;
 
+    //Imagen cargada
+    private BufferedImage image;
+    
     public LoadingState(Thread loadingThread) {
         this.loadingThread = loadingThread;
         this.loadingThread.start();
         //Cargamos la fuente
         font = loadFont("/fonts/benpioneer.ttf", 20);
+        image= loadImage("/background/FondoLoading.jpeg");
     }
 
     @Override
@@ -65,6 +72,7 @@ public class LoadingState extends State{
                 Constants.HEIGHT / 2 + Constants.LOADING_BAR_HEIGHT / 2,
                 Color.RED);
         Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(image, 0, 0, null);
               g2d.setPaint(gp);
 
         //Obtenemos el porcentaje de carga de recursos.
