@@ -41,6 +41,10 @@ public class Assets {
     public static BufferedImage speed;
     //Imagenes para los disparos
     public static BufferedImage knife;
+    //Imagenes para los puños zombie
+    public static BufferedImage shootZombie;
+    //Imagenes para los puños robot
+    public static BufferedImage shootRobot;
     //Imagenes enemigos
     public static BufferedImage robot;
     public static BufferedImage zombie;
@@ -60,6 +64,7 @@ public class Assets {
     //Imagen de fondo
     public static  BufferedImage background;
     public static  BufferedImage background2;
+    public static  BufferedImage pantalla_puntuacion;
     //Atributos para controlar la carga de recursos
     //Indica si hemos terminado la carga de recursos
     public static boolean loaded = false;
@@ -89,6 +94,10 @@ public class Assets {
         speed = loadImage("/effects/fire08.png");
         //Cargamos la imagen de los disparos
         knife = loadImage("/cuchillo/knife.png");
+        //Cargamos la imagen de los disparos
+        shootZombie = loadImage("/shootZombie/hand.png");
+        //Cargamos la imagen de los disparos
+        shootRobot = loadImage("/shootRobot/hand.png");
         //Cargamos enemigos
         //player1 = loadImage("/ships/player1.png");
 

@@ -93,7 +93,7 @@ public class GameState extends State {
 
             for (int i = 0; i < 2; i++) {
 
-                Zombie e = new Zombie(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.robot, this);
+                Zombie e = new Zombie(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.zombie, this);
                 x += 150;
                 movingObject.add(e);
 
@@ -102,7 +102,7 @@ public class GameState extends State {
 
             for (int i = 0; i < 2; i++) {
 
-                Robot e = new Robot(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.zombie, this);
+                Robot e = new Robot(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.robot, this);
                 x += 150;
                 movingObject.add(e);
 

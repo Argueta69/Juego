@@ -107,6 +107,20 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof Player && (a instanceof Knife)) {
             return;
         }
+        //Controlamos que los Zombies no se maten
+        if (a instanceof Zombie && (b instanceof ShootZombie)) {
+            return;
+        }
+        if (b instanceof Zombie && (a instanceof ShootZombie)) {
+            return;
+        }
+        //Controlamos que los Robot no se maten
+        if (a instanceof Robot && (b instanceof ShootRobot)) {
+            return;
+        }
+        if (b instanceof Robot && (a instanceof ShootRobot)) {
+            return;
+        }
         //Si ninguno son Zombies, eliminamos 
         if(a instanceof Zombie || b instanceof Zombie){
                      
@@ -128,6 +142,80 @@ public class MovingObjetcs extends GameObject {
             a.destroy();
             b.destroy();
         }
+        
+        //Colisiones disparos Zombie
+        if (a instanceof ShootZombie && (b instanceof Knife)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        if (b instanceof ShootZombie && (a instanceof Knife)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        //Colisiones disparos Robot
+        if (a instanceof ShootRobot && (b instanceof Knife)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        if (b instanceof ShootRobot && (a instanceof Knife)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        
+        //Colisiones muerte disparo Zombie a Player
+        //Colisiones disparos 
+        if (a instanceof ShootZombie && (b instanceof Player)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        if (b instanceof ShootZombie && (a instanceof Player)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        //Colisiones muerte disparo Robot a Player
+        //Colisiones disparos 
+        if (a instanceof ShootRobot && (b instanceof Player)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        if (b instanceof ShootRobot && (a instanceof Player)) {
+            //Reproducimos la animación de explosión
+            gameState.playExplosion(getCenter());
+            
+            //Elimamos los objetos colisionamos
+            a.destroy();
+            b.destroy();
+        }
+        
+       
     }
 
     protected void destroy() {

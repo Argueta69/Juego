@@ -9,12 +9,14 @@ import gameObjects.Constants;
 import graphics.Assets;
 import static graphics.Assets.fontMed;
 import static graphics.Assets.loadFont;
+import static graphics.Assets.loadImage;
 import graphics.Text;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import math.Vector2D;
@@ -24,25 +26,28 @@ import math.Vector2D;
  * @author argue
  */
 public class LoadingState extends State{
-    
+   
     //Hilo de carga de recursos
     private Thread loadingThread;
-    
+
     //Fuente del texto cargando
     private Font font;
 
+    //Imagen cargada
+    private BufferedImage image;
+    
     public LoadingState(Thread loadingThread) {
         this.loadingThread = loadingThread;
         this.loadingThread.start();
         //Cargamos la fuente
-        font=loadFont("/fonts/futureFont.ttf", 20);
+        font = loadFont("/fonts/benpioneer.ttf", 20);
+        image= loadImage("/background/FondoLoading.jpeg");
     }
-    
 
     @Override
     public void update() {
         //si ha finalizado la carga de recursos
-        if(Assets.loaded){
+        if (Assets.loaded) {
             //Vamos al estado del juego de menu
             State.changeState(new GameState());
             try {
@@ -53,45 +58,47 @@ public class LoadingState extends State{
             }
         }
     }
-    
+
     //Pintamos la barra de carga
     @Override
     public void draw(Graphics g) {
-        
-        //Dibujamos el objeto rectángulo
-        GradientPaint gp=new GradientPaint(Constants.WIDTH/2-Constants.LOADING_BAR_WIDTH/2,
-                Constants.HEIGHT/2-Constants.LOADING_BAR_HEIGHT/2,
-                Color.WHITE,
-                Constants.WIDTH/2+Constants.LOADING_BAR_WIDTH/2,
-                Constants.HEIGHT/2+Constants.LOADING_BAR_HEIGHT/2,
-                Color.BLUE);
         //Necesitamos el objeto Graphics2D para pintar el gradiente
-        Graphics2D g2d= (Graphics2D)g;
-        g2d.setPaint(gp);
-        
+
+        //Dibujamos el objeto rectángulo
+        GradientPaint gp = new GradientPaint(Constants.WIDTH / 2 - Constants.LOADING_BAR_WIDTH / 2,
+                Constants.HEIGHT / 2 - Constants.LOADING_BAR_HEIGHT / 2,
+                Color.WHITE,
+                Constants.WIDTH / 2 + Constants.LOADING_BAR_WIDTH / 2,
+                Constants.HEIGHT / 2 + Constants.LOADING_BAR_HEIGHT / 2,
+                Color.RED);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(image, 0, 0, null);
+              g2d.setPaint(gp);
+
         //Obtenemos el porcentaje de carga de recursos.
-        float percentage=(Assets.count/Assets.MAX_COUNT);
-        
+        float percentage = (Assets.count / Assets.MAX_COUNT);
+
         //Rellenamos el rectángulo a lo ancho según el porcentaje completado
         //A lo alto lo rellenamos completo.
-        g2d.fillRect(Constants.WIDTH/2-Constants.LOADING_BAR_WIDTH/2,
-                Constants.HEIGHT/2-Constants.LOADING_BAR_HEIGHT/2,
-                (int)(Constants.LOADING_BAR_WIDTH*percentage),
+        g2d.fillRect(Constants.WIDTH / 2 - Constants.LOADING_BAR_WIDTH / 2,
+                Constants.HEIGHT / 2 - Constants.LOADING_BAR_HEIGHT / 2,
+                (int) (Constants.LOADING_BAR_WIDTH * percentage),
                 Constants.LOADING_BAR_HEIGHT);
-        
+
         //Dibujamos un marco alrededor del rectángulo
-        g2d.drawRect(Constants.WIDTH/2-Constants.LOADING_BAR_WIDTH/2,
-                Constants.HEIGHT/2-Constants.LOADING_BAR_HEIGHT/2,
+        g2d.drawRect(Constants.WIDTH / 2 - Constants.LOADING_BAR_WIDTH / 2,
+                Constants.HEIGHT / 2 - Constants.LOADING_BAR_HEIGHT / 2,
                 Constants.LOADING_BAR_WIDTH,
                 Constants.LOADING_BAR_HEIGHT);
-        
+
         //Pintamos los textos de nuestra pantalla de cargando
-        Text.drawText(g2d,"SPACE SHIP GAME",
-                new Vector2D(Constants.WIDTH/2, Constants.HEIGHT/2-50),true,Color.WHITE,font);
+        Text.drawText(g2d, "Jump Walker Game",
+                new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2 - 50), true, Color.WHITE, font);
+
+        Text.drawText(g2d, "Cargando...",
+                new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2 + 20), true, Color.WHITE, font);
         
-        Text.drawText(g2d,"LOADING...",
-                new Vector2D(Constants.WIDTH/2, Constants.HEIGHT/2+20),true,Color.WHITE,font);
-        
+         
     }
     
 }

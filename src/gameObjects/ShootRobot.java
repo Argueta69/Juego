@@ -16,16 +16,16 @@ import states.GameState;
  *
  * @author argue
  */
-public class Knife extends MovingObjetcs {
-
+public class ShootRobot extends MovingObjetcs{
+    
     //Constructor del Knife
-    public Knife(Vector2D position, Vector2D velocity, double maxVel, double angle, BufferedImage texture, GameState gameState) {
+    public ShootRobot(Vector2D position, Vector2D velocity, double maxVel, double angle, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVel, texture, gameState);
         this.angle = angle;
         this.velocity = velocity.scale(maxVel);
         //System.out.println("v : " + "Coordenada x: " + velocity.getX() + "Coordenada y: " + velocity.getY());
     }
-
+    
     @Override
     public void update() {
         position = position.add(velocity);
@@ -39,22 +39,22 @@ public class Knife extends MovingObjetcs {
         collideWith();
 
     }
-
+    
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        at = AffineTransform.getTranslateInstance(position.getX() - width / 2, position.getY());
+        at = AffineTransform.getTranslateInstance(position.getX() - width / 2, position.getY()+25);
 
         at.rotate(angle, width, 0);
 
         g2d.drawImage(texture, at, null);
 
     }
-
+    
     @Override
     public Vector2D getCenter() {
         return new Vector2D(position.getX() + width / 2, position.getY() + width / 2);
     }
-
+    
 }

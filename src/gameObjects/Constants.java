@@ -17,6 +17,10 @@ public class Constants {
     
     //Tiempo de disparo
     public static final int FIRERATE=500;
+    //Tiempo de disparo zombie
+    public static final int FIRERATEZOMBIE=1500;
+    //Tiempo de disparo zombie
+    public static final int FIRERATEROBOT=1500;
     //angulo delta
     public static final double DELTAANGLE=0.1;
     //
