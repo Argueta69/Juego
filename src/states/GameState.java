@@ -59,11 +59,8 @@ public class GameState extends State {
     private int level = 0;
     //Lista de mensajes a pintar en pantalla
     private ArrayList<Message> messages = new ArrayList<Message>();
-    private int contadorNiveles;
-    private int contadorLevel;
+    private int contadorLevel = 0;
     //Música de fondo
-    private boolean banderaVida;
-    private boolean banderaMoneda;
     private Sound backgroundMusic;
     private Sound up;
     private Coin c;
@@ -85,6 +82,7 @@ public class GameState extends State {
         cronoGeneralM = new Chronometer();
         cronoGeneralL = new Chronometer();
         level++;
+        contadorLevel++;
         createEnemies();
         //Cargamos sonido
         backgroundMusic = new Sound(Assets.backgroundMusic);
@@ -92,10 +90,6 @@ public class GameState extends State {
         //Ajustamos volumen
         backgroundMusic.changeVolume(-10.0f);
         oleadaIzq = 1;
-        contadorLevel = 1;
-        contadorNiveles = 1;
-        banderaMoneda = false;
-        banderaVida = false;
 
     }
 
@@ -120,7 +114,7 @@ public class GameState extends State {
     }
 
     public void createEnemies() {
-
+     
         messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
                 "LEVEL " + level, Color.WHITE, true, Assets.fontBig, this));
         //Si nivel es mayor que uno cada vez que subamos se reproducira el sonido upLevel
@@ -135,7 +129,7 @@ public class GameState extends State {
         int x = 1300, y = 530;
         if (numero == 1) {
 
-            for (int i = 0; i <= contadorLevel; i++) {
+            for (int i = 0; i < contadorLevel; i++) {
 
                 Zombie e = new Zombie(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.robot, this);
                 x += 150;
@@ -145,7 +139,7 @@ public class GameState extends State {
 
         } else if (numero == 2) {
 
-            for (int i = 0; i <= contadorLevel; i++) {
+            for (int i = 0; i < contadorLevel; i++) {
 
                 Robot e = new Robot(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.zombie, this);
                 x += 150;
@@ -154,7 +148,6 @@ public class GameState extends State {
             }
 
         }
-        contadorLevel++;
         level++;
     }
 
@@ -208,7 +201,7 @@ public class GameState extends State {
             int x = -140, y = 530;
             if (numero == 1) {
 
-                for (int i = 0; i < contadorNiveles; i++) {
+                for (int i = 0; i < contadorLevel; i++) {
                     // Cambiar Assets por lo de Manu
                     ZombieIzq e = new ZombieIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.zombieIzq, this);
                     x += 150;
@@ -218,7 +211,7 @@ public class GameState extends State {
 
             } else if (numero == 2) {
 
-                for (int i = 0; i < contadorNiveles; i++) {
+                for (int i = 0; i < contadorLevel; i++) {
                     // Cambiar Assets por lo de Manu
                     RobotIzq e = new RobotIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.robotIzq, this);
                     x += 150;
@@ -228,8 +221,6 @@ public class GameState extends State {
 
             }
         }
-
-        contadorNiveles++;
         oleadaIzq = 0;
     }
 
@@ -306,14 +297,12 @@ public class GameState extends State {
             Animation animation = blood.get(i);
             g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
         }
-        if(cronoGeneralL.isRunning()){
+
             drawLife();
-        }
-        if(cronoGeneralM.isRunning()){
+
             drawCoins();
-        }
-        
-        
+ 
+
         //Pintamos la puntuación
         drawScore(g);
         //Pintamos las vidas
