@@ -79,6 +79,11 @@ public class Registro extends javax.swing.JFrame {
 
         jPassword.setBackground(new java.awt.Color(255, 255, 0));
         jPassword.setText("jPasswordField1");
+        jPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPasswordMouseClicked(evt);
+            }
+        });
         jPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordActionPerformed(evt);
@@ -132,6 +137,11 @@ public class Registro extends javax.swing.JFrame {
 
         jPasswordR.setBackground(new java.awt.Color(255, 255, 0));
         jPasswordR.setText("jPasswordField1");
+        jPasswordR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPasswordRMouseClicked(evt);
+            }
+        });
         jPasswordR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordRActionPerformed(evt);
@@ -247,6 +257,14 @@ public class Registro extends javax.swing.JFrame {
     private void SalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseExited
         Salir.setForeground(Color.white);        // TODO add your handling code here:
     }//GEN-LAST:event_SalirMouseExited
+
+    private void jPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordMouseClicked
+        jPassword.setText("");
+    }//GEN-LAST:event_jPasswordMouseClicked
+
+    private void jPasswordRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordRMouseClicked
+      jPasswordR.setText("");
+    }//GEN-LAST:event_jPasswordRMouseClicked
 
     /**
      * @param args the command line arguments

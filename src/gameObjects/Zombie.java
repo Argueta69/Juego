@@ -21,10 +21,9 @@ public class Zombie extends MovingObjetcs {
     private Vector2D heading;
     //Control de tiempo entre disparos
     private long time, lastTime;
-    
+
     private Chronometer cronoRun, cronoWalker;
-    
-    
+
     public Zombie(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVel, texture, gameState);
         heading = new Vector2D(-1, 0);
@@ -42,8 +41,6 @@ public class Zombie extends MovingObjetcs {
         lastTime = System.currentTimeMillis();
         position = position.add(velocity);
 
-
-        
         if (time > Constants.FIRERATEZOMBIE) {
             //disparo = true;
             //Creamos un laser y lo añadimos al array de objetos movibles
@@ -58,15 +55,17 @@ public class Zombie extends MovingObjetcs {
             //Reseteamos time
             time = 0;
 
-            if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
-            cronoRun.run(300);
-            cronoWalker.run(600);
-        }
+           
 
-        cronoRun.update();
-        cronoWalker.update();
-          
         }
+        
+         if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
+                cronoRun.run(300);
+                cronoWalker.run(600);
+            }
+
+            cronoRun.update();
+            cronoWalker.update();
 
     }
 
@@ -81,12 +80,12 @@ public class Zombie extends MovingObjetcs {
     public void draw(Graphics g) {
         //Pintamos el enemigo
         if (cronoRun.isRunning()) {
-                //dibuja corriendo
-                g.drawImage(Assets.zombie, (int) position.getX(), (int) position.getY(), null);
-            } else {
-                //dibuja caminando normal
-                g.drawImage(Assets.zombieIzq, (int) position.getX(), (int) position.getY(), null);
-            }
+            //dibuja corriendo
+            g.drawImage(Assets.zombie, (int) position.getX(), (int) position.getY(), null);
+        } else {
+            //dibuja caminando normal
+            g.drawImage(Assets.zombieIzq, (int) position.getX(), (int) position.getY(), null);
+        }
     }
 
     @Override

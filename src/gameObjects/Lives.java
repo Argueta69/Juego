@@ -31,6 +31,6 @@ public class Lives extends MovingObjetcs{
         //Pintamos el corazón
         g.drawImage(texture, (int)position.getX(), (int)position.getY(), null);
     }
-    
+        
     
 }

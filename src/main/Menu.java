@@ -215,7 +215,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jpOptionsMouseClicked
 
     private void jpGoOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpGoOutMouseClicked
-     dispose();
+     System.exit(0);
     }//GEN-LAST:event_jpGoOutMouseClicked
 
     private void jpGameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpGameMouseEntered

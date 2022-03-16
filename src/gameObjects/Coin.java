@@ -14,23 +14,26 @@ import states.GameState;
  *
  * @author Héctor Castaño
  */
-public class Coin extends MovingObjetcs{
-    
+public class Coin extends MovingObjetcs {
+
     public Coin(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVel, texture, gameState);
     }
-    
+
     @Override
-    public void update(){
-       position=position.add(velocity);
+    public void update() {
+        position = position.add(velocity);
+
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        //Pintamos el corazónz
+      
+
+              g.drawImage(texture, (int) position.getX(), (int) position.getY(), null);
         
+
     }
-    
-     @Override
-    public void draw(Graphics g){
-        //Pintamos el corazón
-        g.drawImage(texture, (int)position.getX(), (int)position.getY(), null);
-    }
-    
-    
+
 }

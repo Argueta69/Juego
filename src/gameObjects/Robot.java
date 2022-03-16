@@ -54,15 +54,17 @@ public class Robot extends MovingObjetcs {
             ));
             //Reseteamos time
             time = 0;
-            //Reproducimos sonido de disparo
-            if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
-                cronoRun.run(300);
-                cronoWalker.run(600);
-            }
 
-            cronoRun.update();
-            cronoWalker.update();
         }
+
+        //Reproducimos sonido de disparo
+        if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
+            cronoRun.run(300);
+            cronoWalker.run(600);
+        }
+
+        cronoRun.update();
+        cronoWalker.update();
     }
 
     @Override

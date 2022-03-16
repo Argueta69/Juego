@@ -79,6 +79,11 @@ public class Main extends javax.swing.JFrame {
 
         jPassword.setBackground(new java.awt.Color(255, 255, 0));
         jPassword.setText("jPasswordField1");
+        jPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPasswordMouseClicked(evt);
+            }
+        });
         jPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordActionPerformed(evt);
@@ -229,6 +234,10 @@ public class Main extends javax.swing.JFrame {
     private void SalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseExited
         Salir.setForeground(Color.white);        // TODO add your handling code here:
     }//GEN-LAST:event_SalirMouseExited
+
+    private void jPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordMouseClicked
+    jPassword.setText("");
+    }//GEN-LAST:event_jPasswordMouseClicked
 
     /**
      * @param args the command line arguments

@@ -63,7 +63,7 @@ public class Window extends JFrame implements Runnable {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        
+        setUndecorated(true);
 
         //Dibujamos el canvas(lienzo)
         canvas = new Canvas();

@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.Menu;
 import math.Vector2D;
 
@@ -49,7 +51,6 @@ public class GameState extends State {
     private ArrayList<Animation> explosions = new ArrayList<Animation>();
 
     private ArrayList<Animation> blood = new ArrayList<Animation>();
-
     //Puntuación del jugador
     private int score = 0;
     //Vidas del jugador
@@ -58,20 +59,31 @@ public class GameState extends State {
     private int level = 0;
     //Lista de mensajes a pintar en pantalla
     private ArrayList<Message> messages = new ArrayList<Message>();
+    private int contadorNiveles;
+    private int contadorLevel;
     //Música de fondo
+    private boolean banderaVida;
+    private boolean banderaMoneda;
     private Sound backgroundMusic;
     private Sound up;
+    private Coin c;
+    private Lives l;
     private long time, lastTime;
     private Chronometer cronoVida;
     private Chronometer cronoMonedas;
+    public Chronometer cronoGeneralM;
+    public Chronometer cronoGeneralL;
     private int oleadaIzq;
+
     //Constructor de la clase
     public GameState() {
         player = new Player(new Vector2D(100, 500), new Vector2D(0, 0), Constants.PLAYER_MAX_VEL, Assets.player1, this);
         movingObject.add(player);
         //Aumentamos el nivel
         cronoVida = new Chronometer();
-        cronoMonedas= new Chronometer();
+        cronoMonedas = new Chronometer();
+        cronoGeneralM = new Chronometer();
+        cronoGeneralL = new Chronometer();
         level++;
         createEnemies();
         //Cargamos sonido
@@ -80,23 +92,35 @@ public class GameState extends State {
         //Ajustamos volumen
         backgroundMusic.changeVolume(-10.0f);
         oleadaIzq = 1;
+        contadorLevel = 1;
+        contadorNiveles = 1;
+        banderaMoneda = false;
+        banderaVida = false;
 
     }
 
+    public void drawLife() {
+        if (!cronoVida.isRunning() && !cronoGeneralL.isRunning()) {
+            l = new Lives(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.life, this);
+            movingObject.add(l);
+            cronoVida.run(500);
+            cronoGeneralL.run(10000);
+        }
 
-    public void drawLives() {
-
-        Lives l = new Lives(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.life, this);
-        movingObject.add(l);
     }
 
     public void drawCoins() {
+        if (!cronoMonedas.isRunning() && !cronoGeneralM.isRunning()) {
+            c = new Coin(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.coin, this);
+            movingObject.add(c);
+            cronoMonedas.run(500);
+            cronoGeneralM.run(10000);
+        }
 
-        Coin c = new Coin(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.coin, this);
-        movingObject.add(c);
     }
 
     public void createEnemies() {
+
         messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
                 "LEVEL " + level, Color.WHITE, true, Assets.fontBig, this));
         //Si nivel es mayor que uno cada vez que subamos se reproducira el sonido upLevel
@@ -111,7 +135,7 @@ public class GameState extends State {
         int x = 1300, y = 530;
         if (numero == 1) {
 
-            for (int i = 0; i < level; i++) {
+            for (int i = 0; i <= contadorLevel; i++) {
 
                 Zombie e = new Zombie(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.robot, this);
                 x += 150;
@@ -121,7 +145,7 @@ public class GameState extends State {
 
         } else if (numero == 2) {
 
-            for (int i = 0; i < level; i++) {
+            for (int i = 0; i <= contadorLevel; i++) {
 
                 Robot e = new Robot(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.zombie, this);
                 x += 150;
@@ -130,6 +154,7 @@ public class GameState extends State {
             }
 
         }
+        contadorLevel++;
         level++;
     }
 
@@ -166,30 +191,21 @@ public class GameState extends State {
                 return;
             }
         }
-        
-         if (!cronoMonedas.isRunning()) {
-                drawCoins();
-                cronoMonedas.run(100000);
-            }
 
-           
-        if ( !cronoVida.isRunning()) {
-                drawLives();
-                cronoVida.run(120000);
-            }
-             cronoVida.update();
-              cronoMonedas.update();
+        cronoVida.update();
+        cronoMonedas.update();
+        cronoGeneralL.update();
+        cronoGeneralM.update();
         //Iniciamos oleada.
         //createEnemies();
     }
-    
+
     public void createEnemiesIzq() {
         Random random = new Random();
         int numero = (int) (Math.random() * 2 + 1);
-         int contadorNiveles=1;
-        
+
         if (oleadaIzq == 1) {
-            int x = -270, y = 530;
+            int x = -140, y = 530;
             if (numero == 1) {
 
                 for (int i = 0; i < contadorNiveles; i++) {
@@ -212,6 +228,7 @@ public class GameState extends State {
 
             }
         }
+
         contadorNiveles++;
         oleadaIzq = 0;
     }
@@ -219,15 +236,14 @@ public class GameState extends State {
     public void pasardePantallaAdelante() {
         //cambiar escenario atras
 //        level++;
-          //cambiar escenario atras
+        //cambiar escenario atras
 //        level++;
         if (Constants.NEXTPANTALLA < 6) {
             messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
                     "LEVEL " + level, Color.WHITE, true, Assets.fontBig, this));
             createEnemies();
             Constants.NEXTPANTALLA++;
-            level++;
-            oleadaIzq=1;
+            oleadaIzq = 1;
 
         } else {
             Constants.NEXTPANTALLA = 1;
@@ -290,6 +306,14 @@ public class GameState extends State {
             Animation animation = blood.get(i);
             g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
         }
+        if(cronoGeneralL.isRunning()){
+            drawLife();
+        }
+        if(cronoGeneralM.isRunning()){
+            drawCoins();
+        }
+        
+        
         //Pintamos la puntuación
         drawScore(g);
         //Pintamos las vidas
@@ -371,8 +395,13 @@ public class GameState extends State {
                 backgroundMusic.stop();
                 Menu menu = new Menu();
                 menu.setVisible(true);
-                //Una vez muertos cambaimos el State
-                //State.changeState(new MenuState());
+                try {
+                    Thread.currentThread().join();
+                    //Una vez muertos cambaimos el State
+                    //State.changeState(new MenuState());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GameState.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             //dibujamos cada imagen correspondiente a cada número de vidas
