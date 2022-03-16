@@ -60,6 +60,7 @@ public class GameState extends State {
     //Lista de mensajes a pintar en pantalla
     private ArrayList<Message> messages = new ArrayList<Message>();
     private int contadorLevel = 0;
+     private int contadorNivel = 0;
     //Música de fondo
     private Sound backgroundMusic;
     private Sound up;
@@ -83,6 +84,7 @@ public class GameState extends State {
         cronoGeneralL = new Chronometer();
         level++;
         contadorLevel++;
+        contadorNivel++;
         createEnemies();
         //Cargamos sonido
         backgroundMusic = new Sound(Assets.backgroundMusic);
@@ -148,6 +150,7 @@ public class GameState extends State {
             }
 
         }
+        contadorLevel++;
         level++;
     }
 
@@ -201,7 +204,7 @@ public class GameState extends State {
             int x = -140, y = 530;
             if (numero == 1) {
 
-                for (int i = 0; i < contadorLevel; i++) {
+                for (int i = 0; i < contadorNivel; i++) {
                     // Cambiar Assets por lo de Manu
                     ZombieIzq e = new ZombieIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.zombieIzq, this);
                     x += 150;
@@ -211,7 +214,7 @@ public class GameState extends State {
 
             } else if (numero == 2) {
 
-                for (int i = 0; i < contadorLevel; i++) {
+                for (int i = 0; i < contadorNivel; i++) {
                     // Cambiar Assets por lo de Manu
                     RobotIzq e = new RobotIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.robotIzq, this);
                     x += 150;
@@ -221,6 +224,7 @@ public class GameState extends State {
 
             }
         }
+        contadorNivel++;
         oleadaIzq = 0;
     }
 
