@@ -207,7 +207,7 @@ public class GameState extends State {
                 for (int i = 0; i < contadorNivel; i++) {
                     // Cambiar Assets por lo de Manu
                     ZombieIzq e = new ZombieIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.zombieIzq, this);
-                    x += 150;
+                    x -= 150;
                     movingObject.add(e);
 
                 }
@@ -217,7 +217,7 @@ public class GameState extends State {
                 for (int i = 0; i < contadorNivel; i++) {
                     // Cambiar Assets por lo de Manu
                     RobotIzq e = new RobotIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.robotIzq, this);
-                    x += 150;
+                    x -= 150;
                     movingObject.add(e);
 
                 }
