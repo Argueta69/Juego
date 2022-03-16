@@ -94,7 +94,6 @@ public class MovingObjetcs extends GameObject {
 
     //Control de colisiones, destrucción de objetos colisionados
     private void objectCollision(MovingObjetcs a, MovingObjetcs b) {
-
         //Si el obejto a es de tipo jugador y reapareciendo no colisionamos
         if (a instanceof Player && ((Player) a).isSpawning()) {
             return;
@@ -117,11 +116,23 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof Zombie && (a instanceof ShootZombie)) {
             return;
         }
+        if (a instanceof ZombieIzq && (b instanceof ShootZombie)) {
+            return;
+        }
+        if (b instanceof ZombieIzq && (a instanceof ShootZombie)) {
+            return;
+        }
         //Controlamos que los Robot no se maten
         if (a instanceof Robot && (b instanceof ShootRobot)) {
             return;
         }
         if (b instanceof Robot && (a instanceof ShootRobot)) {
+            return;
+        }
+        if (a instanceof RobotIzq && (b instanceof ShootRobot)) {
+            return;
+        }
+        if (b instanceof RobotIzq && (a instanceof ShootRobot)) {
             return;
         }
 
@@ -140,7 +151,7 @@ public class MovingObjetcs extends GameObject {
             a.destroy();
         }
         //Si ninguno son Zombies, eliminamos 
-        if (a instanceof Zombie || b instanceof Zombie) {
+        if (a instanceof Zombie || b instanceof Zombie || a instanceof ZombieIzq || b instanceof ZombieIzq) {
 
             //Reproducimos la animación de explosión
             gameState.playBlood(getCenter());
@@ -151,7 +162,7 @@ public class MovingObjetcs extends GameObject {
         }
 
         //Si ninguno son Robots, eliminamos 
-        if (a instanceof Robot || b instanceof Robot) {
+        if (a instanceof Robot || b instanceof Robot || a instanceof RobotIzq || b instanceof RobotIzq) {
 
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
@@ -232,6 +243,8 @@ public class MovingObjetcs extends GameObject {
             a.destroy();
             b.destroy();
         }
+
+    
 
     }
 

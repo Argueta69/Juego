@@ -46,8 +46,14 @@ public class Assets {
     //Imagenes para los puños robot
     public static BufferedImage shootRobot;
     //Imagenes enemigos
-    public static BufferedImage robot;
+    public static BufferedImage robotIzq;
+    public static BufferedImage robotRunDer;
+    public static BufferedImage robotWalkerDer;
     public static BufferedImage zombie;
+    public static BufferedImage robot;
+    public static BufferedImage zombieIzq;
+    public static BufferedImage zombieRunDer;
+    public static BufferedImage zombieWalkerDer;
     //explisión
     public static BufferedImage[] arrayFramesExp = new BufferedImage[9];
     //Fuentes
@@ -92,7 +98,13 @@ public class Assets {
 
         //Enemigos
         robot = loadImage("/enemys/robot.png");
+        robotIzq = loadImage("/enemys/robotIzq.png");
+        robotRunDer = loadImage("/enemys/robotRunDer.png");
+        robotWalkerDer = loadImage("/enemys/robotWalkerDer.png");
         zombie = loadImage("/enemys/zombie.png");
+        zombieIzq = loadImage("/enemys/zombieIzq.png");
+        zombieRunDer = loadImage("/enemys/zombieRunDer.png");
+        zombieWalkerDer = loadImage("/enemys/zombieWalkerDer.png");
 
         //Cargamos en el obejto speed la imagen de la propulsión
         speed = loadImage("/effects/fire08.png");

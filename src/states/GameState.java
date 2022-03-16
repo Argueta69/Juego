@@ -13,7 +13,9 @@ import gameObjects.Message;
 import gameObjects.MovingObjetcs;
 import gameObjects.Player;
 import gameObjects.Robot;
+import gameObjects.RobotIzq;
 import gameObjects.Zombie;
+import gameObjects.ZombieIzq;
 import graphics.Animation;
 import graphics.Assets;
 import graphics.Sound;
@@ -60,13 +62,16 @@ public class GameState extends State {
     private Sound backgroundMusic;
     private Sound up;
     private long time, lastTime;
-
+    private Chronometer cronoVida;
+    private Chronometer cronoMonedas;
+    private int oleadaIzq;
     //Constructor de la clase
     public GameState() {
-        player = new Player(new Vector2D(640, 500), new Vector2D(0, 0), Constants.PLAYER_MAX_VEL, Assets.player1, this);
+        player = new Player(new Vector2D(100, 500), new Vector2D(0, 0), Constants.PLAYER_MAX_VEL, Assets.player1, this);
         movingObject.add(player);
         //Aumentamos el nivel
-        monedas();
+        cronoVida = new Chronometer();
+        cronoMonedas= new Chronometer();
         level++;
         createEnemies();
         //Cargamos sonido
@@ -74,21 +79,10 @@ public class GameState extends State {
         backgroundMusic.loop();
         //Ajustamos volumen
         backgroundMusic.changeVolume(-10.0f);
+        oleadaIzq = 1;
 
     }
 
-    public void vidas() {
-
-    }
-
-    public void monedas() {
-        time += System.currentTimeMillis() - lastTime;
-        lastTime = System.currentTimeMillis();
-        if(time==10){
-            drawCoins();
-        }
-       
-    }
 
     public void drawLives() {
 
@@ -181,13 +175,58 @@ public class GameState extends State {
                 return;
             }
         }
+        
+         if (!cronoMonedas.isRunning()) {
+                drawCoins();
+                cronoMonedas.run(100000);
+            }
 
+           
+        if ( !cronoVida.isRunning()) {
+                drawLives();
+                cronoVida.run(120000);
+            }
+             cronoVida.update();
+              cronoMonedas.update();
         //Iniciamos oleada.
         //createEnemies();
+    }
+    
+    public void createEnemiesIzq() {
+        Random random = new Random();
+        int numero = (int) (Math.random() * 2 + 1);
+        
+        if (oleadaIzq == 1) {
+            int x = -270, y = 530;
+            if (numero == 1) {
+
+                for (int i = 0; i < 2; i++) {
+                    // Cambiar Assets por lo de Manu
+                    ZombieIzq e = new ZombieIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.zombieIzq, this);
+                    x += 150;
+                    movingObject.add(e);
+
+                }
+
+            } else if (numero == 2) {
+
+                for (int i = 0; i < 2; i++) {
+                    // Cambiar Assets por lo de Manu
+                    RobotIzq e = new RobotIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.robotIzq, this);
+                    x += 150;
+                    movingObject.add(e);
+
+                }
+
+            }
+        }
+        oleadaIzq = 0;
     }
 
     public void pasardePantallaAdelante() {
         //cambiar escenario atras
+//        level++;
+          //cambiar escenario atras
 //        level++;
         if (Constants.NEXTPANTALLA < 6) {
             messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
@@ -195,6 +234,7 @@ public class GameState extends State {
             createEnemies();
             Constants.NEXTPANTALLA++;
             level++;
+            oleadaIzq=1;
 
         } else {
             Constants.NEXTPANTALLA = 1;

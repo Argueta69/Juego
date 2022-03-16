@@ -15,29 +15,32 @@ import states.GameState;
  *
  * @author argue
  */
-public class Robot extends MovingObjetcs{
-    
+public class Robot extends MovingObjetcs {
+
     //Indica hacía donde está mirando la nave.
     private Vector2D heading;
     //Control de tiempo entre disparos
     private long time, lastTime;
+
+    private Chronometer cronoRun, cronoWalker;
 
     public Robot(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVel, texture, gameState);
         heading = new Vector2D(-1, 0);
         time = 0;
         lastTime = System.currentTimeMillis();
+        cronoRun = new Chronometer();
+        cronoWalker = new Chronometer();
     }
-    
-     @Override
-    public void update(){
+
+    @Override
+    public void update() {
         //Control de tiempo
         //Almacenamos el tiempo que ha pasado desde la ultima vez que hemos entrado en el metodo.
         time += System.currentTimeMillis() - lastTime;
         lastTime = System.currentTimeMillis();
         position = position.add(velocity);
 
-        
         if (time > Constants.FIRERATEROBOT) {
             //disparo = true;
             //Creamos un laser y lo añadimos al array de objetos movibles
@@ -52,28 +55,38 @@ public class Robot extends MovingObjetcs{
             //Reseteamos time
             time = 0;
             //Reproducimos sonido de disparo
-            //shoot.play();
+            if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
+                cronoRun.run(300);
+                cronoWalker.run(600);
+            }
 
-            //System.out.println("Crear: " + "Coordenada x: " + heading.getX() + "Coordenada y: " + heading.getY() + "Angulo: " + angle);
+            cronoRun.update();
+            cronoWalker.update();
         }
     }
-    
+
     @Override
-    public void destroy(){
+    public void destroy() {
         //Incrementamos la puntuación del jugador por eliminar un Meteor
-        gameState.addScore(Constants.UFO_SCORE,position);
+        gameState.addScore(Constants.UFO_SCORE, position);
         super.destroy();
     }
-        
+
     @Override
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
         //Pintamos el enemigo
-        g.drawImage(texture, (int)position.getX(), (int)position.getY(), null);
+        if (cronoRun.isRunning()) {
+            //dibuja corriendo
+            g.drawImage(Assets.robot, (int) position.getX(), (int) position.getY(), null);
+        } else {
+            //dibuja caminando normal
+            g.drawImage(Assets.robotIzq, (int) position.getX(), (int) position.getY(), null);
+        }
     }
-    
+
     @Override
-    public void autoDestroy(){
+    public void autoDestroy() {
         super.destroy();
     }
-    
+
 }

@@ -171,7 +171,6 @@ public class Player extends MovingObjetcs {
             position.setX(0);
 
             //cambiar de escenario.
-
             gameState.pasardePantallaAdelante();
         }
         if (position.getY() > Constants.HEIGHT) {
@@ -186,6 +185,10 @@ public class Player extends MovingObjetcs {
         }
         if (position.getY() < 0) {
             position.setY(Constants.HEIGHT);
+        }
+
+        if (position.getX() == 640) {
+            gameState.createEnemiesIzq();
         }
 
         //Actualizamos tiempo de reaparición

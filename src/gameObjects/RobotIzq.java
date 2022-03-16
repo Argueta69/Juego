@@ -15,19 +15,18 @@ import states.GameState;
  *
  * @author argue
  */
-public class Zombie extends MovingObjetcs {
+public class RobotIzq extends MovingObjetcs {
 
     //Indica hacía donde está mirando la nave.
     private Vector2D heading;
     //Control de tiempo entre disparos
     private long time, lastTime;
-    
+    //Chronometer para la animacion
     private Chronometer cronoRun, cronoWalker;
-    
-    
-    public Zombie(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
+
+    public RobotIzq(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVel, texture, gameState);
-        heading = new Vector2D(-1, 0);
+        heading = new Vector2D(1, 0);
         time = 0;
         lastTime = System.currentTimeMillis();
         cronoRun = new Chronometer();
@@ -42,31 +41,32 @@ public class Zombie extends MovingObjetcs {
         lastTime = System.currentTimeMillis();
         position = position.add(velocity);
 
-
-        
-        if (time > Constants.FIRERATEZOMBIE) {
+        if (time > Constants.FIRERATEROBOT) {
             //disparo = true;
             //Creamos un laser y lo añadimos al array de objetos movibles
-            gameState.getMovingObjetcs().add(0, new ShootZombie(
+            gameState.getMovingObjetcs().add(0, new ShootRobot(
                     getCenter().add(heading.scale(width)),//Vector posicion disparo
                     heading,//velocidad
                     Constants.LASER_VEL,//velocidad maxima
                     angle,//Angulo de direccion
-                    Assets.shootZombie,
+                    Assets.shootRobot,
                     gameState
             ));
             //Reseteamos time
             time = 0;
+            //Reproducimos sonido de disparo
+            //shoot.play();
 
-            if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
+            //System.out.println("Crear: " + "Coordenada x: " + heading.getX() + "Coordenada y: " + heading.getY() + "Angulo: " + angle);
+        }
+
+        if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
             cronoRun.run(300);
             cronoWalker.run(600);
         }
 
         cronoRun.update();
         cronoWalker.update();
-          
-        }
 
     }
 
@@ -80,12 +80,12 @@ public class Zombie extends MovingObjetcs {
     @Override
     public void draw(Graphics g) {
         //Pintamos el enemigo
-        if (cronoRun.isRunning()) {
+      if (cronoRun.isRunning()) {
                 //dibuja corriendo
-                g.drawImage(Assets.zombie, (int) position.getX(), (int) position.getY(), null);
+                g.drawImage(Assets.robotRunDer, (int) position.getX(), (int) position.getY(), null);
             } else {
                 //dibuja caminando normal
-                g.drawImage(Assets.zombieIzq, (int) position.getX(), (int) position.getY(), null);
+                g.drawImage(Assets.robotWalkerDer, (int) position.getX(), (int) position.getY(), null);
             }
     }
 

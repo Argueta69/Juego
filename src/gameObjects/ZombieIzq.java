@@ -15,19 +15,18 @@ import states.GameState;
  *
  * @author argue
  */
-public class Zombie extends MovingObjetcs {
+public class ZombieIzq extends MovingObjetcs {
 
     //Indica hacía donde está mirando la nave.
     private Vector2D heading;
     //Control de tiempo entre disparos
     private long time, lastTime;
-    
+    //Chronometer para la animacion
     private Chronometer cronoRun, cronoWalker;
-    
-    
-    public Zombie(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
+
+    public ZombieIzq(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVel, texture, gameState);
-        heading = new Vector2D(-1, 0);
+        heading = new Vector2D(1, 0);
         time = 0;
         lastTime = System.currentTimeMillis();
         cronoRun = new Chronometer();
@@ -42,8 +41,6 @@ public class Zombie extends MovingObjetcs {
         lastTime = System.currentTimeMillis();
         position = position.add(velocity);
 
-
-        
         if (time > Constants.FIRERATEZOMBIE) {
             //disparo = true;
             //Creamos un laser y lo añadimos al array de objetos movibles
@@ -57,16 +54,19 @@ public class Zombie extends MovingObjetcs {
             ));
             //Reseteamos time
             time = 0;
+            //Reproducimos sonido de disparo
+            //shoot.play();
 
-            if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
+            //System.out.println("Crear: " + "Coordenada x: " + heading.getX() + "Coordenada y: " + heading.getY() + "Angulo: " + angle);
+        }
+
+        if (!cronoRun.isRunning() && !cronoWalker.isRunning()) {
             cronoRun.run(300);
             cronoWalker.run(600);
         }
 
         cronoRun.update();
         cronoWalker.update();
-          
-        }
 
     }
 
@@ -80,12 +80,13 @@ public class Zombie extends MovingObjetcs {
     @Override
     public void draw(Graphics g) {
         //Pintamos el enemigo
-        if (cronoRun.isRunning()) {
+                //Pintamos el enemigo
+       if (cronoRun.isRunning()) {
                 //dibuja corriendo
-                g.drawImage(Assets.zombie, (int) position.getX(), (int) position.getY(), null);
+                g.drawImage(Assets.zombieRunDer, (int) position.getX(), (int) position.getY(), null);
             } else {
                 //dibuja caminando normal
-                g.drawImage(Assets.zombieIzq, (int) position.getX(), (int) position.getY(), null);
+                g.drawImage(Assets.zombieWalkerDer, (int) position.getX(), (int) position.getY(), null);
             }
     }
 
