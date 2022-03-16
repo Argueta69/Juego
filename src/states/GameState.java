@@ -109,32 +109,23 @@ public class GameState extends State {
         int numero = (int) (Math.random() * 2 + 1);
         //Pintamos los enemugos y los añadimos al array de movingObject
         int x = 1300, y = 530;
-        int xi = -270;
         if (numero == 1) {
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < level; i++) {
 
                 Zombie e = new Zombie(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.robot, this);
                 x += 150;
                 movingObject.add(e);
 
-                Robot r = new Robot(new Vector2D(xi, y), new Vector2D(1, 0), 1, Assets.robot, this);
-                xi += 150;
-                movingObject.add(r);
-
             }
 
         } else if (numero == 2) {
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < level; i++) {
 
                 Robot e = new Robot(new Vector2D(x, y), new Vector2D(-1, 0), 4, Assets.zombie, this);
                 x += 150;
                 movingObject.add(e);
-
-                Zombie z = new Zombie(new Vector2D(xi, y), new Vector2D(1, 0), 2, Assets.zombie, this);
-                xi += 150;
-                movingObject.add(z);
 
             }
 
@@ -195,12 +186,13 @@ public class GameState extends State {
     public void createEnemiesIzq() {
         Random random = new Random();
         int numero = (int) (Math.random() * 2 + 1);
+         int contadorNiveles=1;
         
         if (oleadaIzq == 1) {
             int x = -270, y = 530;
             if (numero == 1) {
 
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < contadorNiveles; i++) {
                     // Cambiar Assets por lo de Manu
                     ZombieIzq e = new ZombieIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.zombieIzq, this);
                     x += 150;
@@ -210,7 +202,7 @@ public class GameState extends State {
 
             } else if (numero == 2) {
 
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < contadorNiveles; i++) {
                     // Cambiar Assets por lo de Manu
                     RobotIzq e = new RobotIzq(new Vector2D(x, y), new Vector2D(1, 0), 2, Assets.robotIzq, this);
                     x += 150;
@@ -220,6 +212,7 @@ public class GameState extends State {
 
             }
         }
+        contadorNiveles++;
         oleadaIzq = 0;
     }
 
@@ -370,10 +363,10 @@ public class GameState extends State {
             if (lives <= 0) {
                 //No mostramos al player
                 player.end();
+                movingObject.remove(player);
                 //Mostramos mensaje de nuevo nivel
                 messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
                         "GAME OVER ", Color.WHITE, true, Assets.fontBig, this));
-
                 //Paramos la música al morir
                 backgroundMusic.stop();
                 Menu menu = new Menu();
