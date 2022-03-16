@@ -109,7 +109,21 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof Player && (a instanceof Knife)) {
             return;
         }
-        //Controlamos que los Zombies no se maten
+        //Controlamos colisiones no desaparezca las monedas que reaparece en el juego 
+        if (a instanceof Coin && (b instanceof Knife)) {
+            return;
+        }
+        if (b instanceof Coin && (a instanceof Knife)) {
+            return;
+        }
+        //Controlamos colisiones no desaparezca las vidas que reaparece en el juego 
+        if (a instanceof Lives && (b instanceof Knife)) {
+            return;
+        }
+        if (b instanceof Lives && (a instanceof Knife)) {
+            return;
+        }
+        //Controlamos que los Zombies no se maten con los zombie
         if (a instanceof Zombie && (b instanceof ShootZombie)) {
             return;
         }
@@ -122,7 +136,20 @@ public class MovingObjetcs extends GameObject {
         if (b instanceof ZombieIzq && (a instanceof ShootZombie)) {
             return;
         }
-        //Controlamos que los Robot no se maten
+        //Controlamos que los Zombies no se maten con los robot
+        if (a instanceof Zombie && (b instanceof ShootRobot)) {
+            return;
+        }
+        if (b instanceof Zombie && (a instanceof ShootRobot)) {
+            return;
+        }
+        if (a instanceof ZombieIzq && (b instanceof ShootRobot)) {
+            return;
+        }
+        if (b instanceof ZombieIzq && (a instanceof ShootRobot)) {
+            return;
+        }
+        //Controlamos que los Robot no se maten con los robot
         if (a instanceof Robot && (b instanceof ShootRobot)) {
             return;
         }
@@ -133,6 +160,19 @@ public class MovingObjetcs extends GameObject {
             return;
         }
         if (b instanceof RobotIzq && (a instanceof ShootRobot)) {
+            return;
+        }
+        //Controlamos que los Robot no se maten con los zombie
+        if (a instanceof Robot && (b instanceof ShootZombie)) {
+            return;
+        }
+        if (b instanceof Robot && (a instanceof ShootZombie)) {
+            return;
+        }
+        if (a instanceof RobotIzq && (b instanceof ShootZombie)) {
+            return;
+        }
+        if (b instanceof RobotIzq && (a instanceof ShootZombie)) {
             return;
         }
 

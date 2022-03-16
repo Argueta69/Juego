@@ -140,7 +140,7 @@ public class Assets {
         fontMed = loadFont("/fonts/futureFont.ttf", 20);
 
         //Cargamos los sonidos
-        backgroundMusic = loadSound("/sounds/backgroundMusic.wav");
+        backgroundMusic = loadSound("/sounds/backGroundMusic.wav");
         explosion = loadSound("/sounds/explosion.wav");
         playerLoose = loadSound("/sounds/playerLoose.wav");
         playerShoot = loadSound("/sounds/playerShoot.wav");
