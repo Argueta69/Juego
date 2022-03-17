@@ -27,6 +27,12 @@ public class EstadoJuego {
         this.vidas = vidas;
     }
 
+    public EstadoJuego(String nombre, int puntos) {
+        this.nombre = nombre;
+        this.puntos = puntos;
+    }
+    
+    
     
 
     public String getNombre() {

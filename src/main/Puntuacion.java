@@ -6,6 +6,11 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Font;
+import graphics.Assets;
+import java.util.ArrayList;
+import states.EstadoJuego;
+import Conector.ConectorBBDD;
 
 /**
  *
@@ -13,12 +18,23 @@ import java.awt.Color;
  */
 public class Puntuacion extends javax.swing.JFrame {
 
+    private Font fA;
+    private Font fB;
+    private ArrayList<EstadoJuego> e = new ArrayList<EstadoJuego>();
+    ConectorBBDD c;
+
     /**
      * Creates new form Puntuacion
      */
     public Puntuacion() {
         initComponents();
+        c = new ConectorBBDD();
+        c.getConexion();
+        e = c.sacarPuntuaciones();
         setSize(1280, 720);
+        fA = Assets.loadFont("/fonts/benpioneer.ttf", 30);
+        fB = Assets.loadFont("/fonts/benpioneer.ttf", 20);
+        cargarDatos();
     }
 
     /**
@@ -31,7 +47,15 @@ public class Puntuacion extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnLogin = new javax.swing.JButton();
+        Salir = new javax.swing.JLabel();
+        jUsuario = new javax.swing.JLabel();
+        jPuntuacion = new javax.swing.JLabel();
+        jUsuarioL1 = new javax.swing.JLabel();
+        jPuntuacion1 = new javax.swing.JLabel();
+        jUsuarioL2 = new javax.swing.JLabel();
+        jPuntuacion2 = new javax.swing.JLabel();
+        jUsuarioL3 = new javax.swing.JLabel();
+        jPuntuacion3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,32 +64,74 @@ public class Puntuacion extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnLogin.setBackground(new java.awt.Color(255, 51, 51));
-        btnLogin.setFont(new java.awt.Font("Stencil Std", 1, 18)); // NOI18N
-        btnLogin.setText("Volver");
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+        Salir.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        Salir.setForeground(new java.awt.Color(255, 255, 255));
+        Salir.setText("X");
+        Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SalirMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLoginMouseEntered(evt);
+                SalirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLoginMouseExited(evt);
+                SalirMouseExited(evt);
             }
         });
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 640, 160, 50));
+        jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, 20, 30));
+
+        jUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jUsuario.setText("Usuario");
+        jPanel1.add(jUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 320, 50));
+
+        jPuntuacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPuntuacion.setForeground(new java.awt.Color(255, 255, 255));
+        jPuntuacion.setText("Puntuacion");
+        jPuntuacion.setToolTipText("");
+        jPanel1.add(jPuntuacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, 480, 60));
+
+        jUsuarioL1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jUsuarioL1.setForeground(new java.awt.Color(255, 255, 255));
+        jUsuarioL1.setText("Label 1");
+        jPanel1.add(jUsuarioL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 320, 50));
+
+        jPuntuacion1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPuntuacion1.setForeground(new java.awt.Color(255, 255, 255));
+        jPuntuacion1.setText("Label 1");
+        jPuntuacion1.setToolTipText("");
+        jPanel1.add(jPuntuacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 250, 480, 60));
+
+        jUsuarioL2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jUsuarioL2.setForeground(new java.awt.Color(255, 255, 255));
+        jUsuarioL2.setText("Label 2");
+        jPanel1.add(jUsuarioL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 320, 50));
+
+        jPuntuacion2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPuntuacion2.setForeground(new java.awt.Color(255, 255, 255));
+        jPuntuacion2.setText("Label 2");
+        jPuntuacion2.setToolTipText("");
+        jPanel1.add(jPuntuacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 340, 480, 60));
+
+        jUsuarioL3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jUsuarioL3.setForeground(new java.awt.Color(255, 255, 255));
+        jUsuarioL3.setText("Label 3");
+        jPanel1.add(jUsuarioL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 320, 50));
+
+        jPuntuacion3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPuntuacion3.setForeground(new java.awt.Color(255, 255, 255));
+        jPuntuacion3.setText("Label 3");
+        jPuntuacion3.setToolTipText("");
+        jPanel1.add(jPuntuacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, 480, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/puntuaciones.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,30 +141,56 @@ public class Puntuacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
-        // TODO add your handling code here:
-        btnLogin.setBackground(Color.black);
-        btnLogin.setForeground(Color.white);
-    }//GEN-LAST:event_btnLoginMouseEntered
-
-    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
-        // TODO add your handling code here:
-        btnLogin.setBackground(new Color(255, 51, 51));
-        btnLogin.setForeground(Color.white);
-    }//GEN-LAST:event_btnLoginMouseExited
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+    private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
         Menu menu = new Menu();
         menu.setVisible(true);
-    }//GEN-LAST:event_btnLoginActionPerformed
+        dispose();
 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SalirMouseClicked
+
+    private void SalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseEntered
+        Salir.setForeground(Color.BLACK);        // TODO add your handling code here:
+    }//GEN-LAST:event_SalirMouseEntered
+
+    private void SalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseExited
+        Salir.setForeground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_SalirMouseExited
+
+    public void cargarDatos() {
+        jUsuario.setFont(fA);
+        jUsuarioL1.setFont(fB);
+        jUsuarioL2.setFont(fB);
+        jUsuarioL3.setFont(fB);
+
+        jPuntuacion.setFont(fA);
+        jPuntuacion1.setFont(fB);
+        jPuntuacion2.setFont(fB);
+        jPuntuacion3.setFont(fB);
+
+        jUsuarioL1.setText(e.get(0).getNombre());
+        jPuntuacion1.setText(String.valueOf(e.get(0).getPuntos()));
+
+        jUsuarioL2.setText(e.get(1).getNombre());
+        jPuntuacion2.setText(String.valueOf(e.get(1).getPuntos()));
+
+        jUsuarioL3.setText(e.get(2).getNombre());
+        jPuntuacion3.setText(String.valueOf(e.get(2).getPuntos()));
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel Salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jPuntuacion;
+    private javax.swing.JLabel jPuntuacion1;
+    private javax.swing.JLabel jPuntuacion2;
+    private javax.swing.JLabel jPuntuacion3;
+    private javax.swing.JLabel jUsuario;
+    private javax.swing.JLabel jUsuarioL1;
+    private javax.swing.JLabel jUsuarioL2;
+    private javax.swing.JLabel jUsuarioL3;
     // End of variables declaration//GEN-END:variables
 }

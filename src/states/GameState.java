@@ -5,6 +5,7 @@
  */
 package states;
 
+import Conector.ConectorBBDD;
 import gameObjects.Chronometer;
 import gameObjects.Coin;
 import gameObjects.Constants;
@@ -41,7 +42,12 @@ import math.Vector2D;
  * Clase para gestionar el estado principal del juego hola bb que tal?
  */
 public class GameState extends State {
-
+    
+    //Carga el conector de base de datos
+    ConectorBBDD conector;
+    EstadoJuego estado;
+    
+    
     //Creamos el objeto jugador
     private Player player;
 
@@ -92,6 +98,8 @@ public class GameState extends State {
         //Ajustamos volumen
         backgroundMusic.changeVolume(-10.0f);
         oleadaIzq = 1;
+        
+        conector=new ConectorBBDD();
 
     }
 
@@ -156,7 +164,7 @@ public class GameState extends State {
 
     //Actualiza
     public void update() {
-
+        
         //Actualizamos los elementos del array
         for (int i = 0; i < movingObject.size(); i++) {
             movingObject.get(i).update();
@@ -192,6 +200,8 @@ public class GameState extends State {
         cronoMonedas.update();
         cronoGeneralL.update();
         cronoGeneralM.update();
+        
+        
         //Iniciamos oleada.
         //createEnemies();
     }
@@ -308,6 +318,8 @@ public class GameState extends State {
         drawScore(g);
         //Pintamos las vidas
         drawLives(g);
+        
+        conector.updateEstadoJuego(score, level, lives);
 
     }
 
@@ -375,6 +387,7 @@ public class GameState extends State {
 
             //Si el número de vida es menor que 0 salimos la partidas, habrá terminado
             if (lives <= 0) {
+                
                 //No mostramos al player
                 player.end();
                 movingObject.remove(player);

@@ -7,7 +7,8 @@ package main;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
-
+import Conector.ConectorBBDD;
+import gameObjects.Constants;
 /**
  *
  * @author argue
@@ -168,6 +169,7 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debes introducir una contraseña", "Cuidado", 0);
 
         } else {
+             Constants.NOMBRE_ESTADO_JUEGO=jUser.getText();
             c.accesoLogin(this, jPassword, jUser);
 
         }

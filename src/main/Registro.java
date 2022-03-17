@@ -7,6 +7,7 @@ package main;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import Conector.ConectorBBDD;
 
 /**
  *

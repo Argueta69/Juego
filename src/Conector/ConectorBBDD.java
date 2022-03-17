@@ -5,6 +5,7 @@
  */
 package Conector;
 
+import gameObjects.Constants;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -106,105 +108,10 @@ public class ConectorBBDD {
             e.printStackTrace();
         }
     }
-
-    public boolean accesoLogin(JFrame j, JPasswordField jContrasenia, JTextField jUser) {
-        boolean exito = false;
+      public void registrarEstadoJuego(JFrame j, JTextField jUser) {
         ConectorBBDD con = new ConectorBBDD();
         Connection conexion = con.getConexion();
-        try {
-
-            ps = conexion.prepareStatement("SELECT user, password FROM usuarios");
-
-            String pass = String.valueOf(jContrasenia.getPassword());
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                if (jUser.getText().equals(rs.getString(1)) && pass.equals(rs.getString(2))) {
-                    exito = true;
-                    Menu menu = new Menu();
-                    menu.setVisible(true);
-                    menu.setLocationRelativeTo(j);
-                    j.dispose();
-                    registrarEstadoJuego(j, jUser);
-                    j.dispose();
-                    break;
-                } else {
-
-                }
-            }
-            if (!exito) {
-                JOptionPane.showMessageDialog(j, "Las credenciales de acceso no son correctas.", "Error login", 0);
-
-            }
-            rs.close();
-            ps.close();
-            conexion.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return exito;
-    }
-
-    public int cargarIdUsuario(JFrame j, JTextField jUser) {
-        ConectorBBDD con = new ConectorBBDD();
-        Connection conexion = con.getConexion();
-        int idUsuario = 0;
-        try {
-
-            ps = conexion.prepareStatement("SELECT idUsuario FROM usuarios Where user=?;");
-            ps.setString(1, jUser.getText());
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                idUsuario = rs.getInt("idUsuario");
-                System.out.println(idUsuario);
-                break;
-            }
-            rs.close();
-            ps.close();
-            conexion.close();
-        } catch (SQLException ex) {
-
-            ex.printStackTrace();
-        }
-        return idUsuario;
-
-    }
-    
-    
-     public int cargarIdEstadoJuego(String usuario) {
-        ConectorBBDD con = new ConectorBBDD();
-        Connection conexion = con.getConexion();
-        int idEstadoJuego = 0;
-        try {
-
-            ps = conexion.prepareStatement("SELECT idEstadoJuego FROM jumpwalkergame.estadojuego where nombre=? order by idEstadoJuego desc limit 1 ");
-            ps.setString(1, usuario);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                idEstadoJuego = rs.getInt("idEstadoJuego");
-                //System.out.println(idEstadoJuego);
-                break;
-            }
-            rs.close();
-            ps.close();
-            conexion.close();
-        } catch (SQLException ex) {
-
-            ex.printStackTrace();
-        }
-        return idEstadoJuego;
-
-    }
-    
-   
-
-    public void registrarEstadoJuego(JFrame j, JTextField jUser) {
-        ConectorBBDD con = new ConectorBBDD();
-        Connection conexion = con.getConexion();
-        int id = cargarIdUsuario(j, jUser);
+        int id = cargarIdUsuario(jUser.getText());
         try {
             ps = conexion.prepareStatement("INSERT INTO estadojuego(nombre,idUsuario,puntos,nivel,vidas) VALUES (?,?,?,?,?);");
 
@@ -233,39 +140,154 @@ public class ConectorBBDD {
         }
     }
     
-    public void updateEstadoJuego(EstadoJuego e,String user){
+
+    public boolean accesoLogin(JFrame j, JPasswordField jContrasenia, JTextField jUser) {
+        boolean exito = false;
         ConectorBBDD con = new ConectorBBDD();
         Connection conexion = con.getConexion();
-        int id = cargarIdEstadoJuego(user);
         try {
-            ps = conexion.prepareStatement("update estadojuego set puntos=?,nivel=?,vidas=? where idEstadoJuego=?");
 
-            ps.setInt(1, e.getPuntos());
-            ps.setInt(2, e.getNivel());
-            ps.setInt(3, e.getVidas());
-            ps.setInt(4, id);
+            ps = conexion.prepareStatement("SELECT user, password FROM usuarios");
 
+            String pass = String.valueOf(jContrasenia.getPassword());
+            rs = ps.executeQuery();
 
-            int res = ps.executeUpdate();
+            while (rs.next()) {
+                if (jUser.getText().equals(rs.getString(1)) && pass.equals(rs.getString(2))) {
+                    exito = true;
+                    Menu menu = new Menu();
+                    menu.setVisible(true);
+                    menu.setLocationRelativeTo(j);
+                    registrarEstadoJuego(j, jUser);
+                    j.dispose();
+                    break;
+                } else {
 
-            if (res > 0) {
-
-            } else {
-                System.out.println("Error al guardar");
-             
+                }
+            }
+            if (!exito) {
+                JOptionPane.showMessageDialog(j, "Las credenciales de acceso no son correctas.", "Error login", 0);
 
             }
             rs.close();
             ps.close();
             conexion.close();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exito;
+    }
+
+    public int cargarIdUsuario(String user) {
+        ConectorBBDD con = new ConectorBBDD();
+        Connection conexion = con.getConexion();
+        int idUsuario = 0;
+        try {
+
+            ps = conexion.prepareStatement("SELECT idUsuario FROM usuarios Where user=?;");
+            ps.setString(1, user);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                idUsuario = rs.getInt("idUsuario");
+                System.out.println(idUsuario);
+                break;
+            }
+            rs.close();
+            ps.close();
+            conexion.close();
         } catch (SQLException ex) {
 
             ex.printStackTrace();
         }
-    } 
+        return idUsuario;
+
+    }
+
+    public int cargarIdEstadoJuego(String user) {
+        ConectorBBDD con = new ConectorBBDD();
+        Connection conexion = con.getConexion();
+        int idEstadoJuego = 0;
+        try {
+
+            ps = conexion.prepareStatement("SELECT idEstadoJuego FROM estadojuego WHERE nombre=? ORDER BY idEstadoJuego desc limit 1;");
+            ps.setString(1, user);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                idEstadoJuego = rs.getInt("idEstadoJuego");
+                System.out.println(idEstadoJuego);
+                break;
+            }
+            rs.close();
+            ps.close();
+            conexion.close();
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        }
+        return idEstadoJuego;
+
+    }
+
+  
+
+    public ArrayList<EstadoJuego> sacarPuntuaciones() {
+        ArrayList<EstadoJuego> e;
+        e = new ArrayList<EstadoJuego>();
+
+        ConectorBBDD con = new ConectorBBDD();
+        Connection conexion = con.getConexion();
+        try {
+
+            ps = conexion.prepareStatement("SELECT nombre,puntos FROM estadojuego order by puntos desc limit 3;");
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                EstadoJuego estado = new EstadoJuego();
+                estado.setNombre(rs.getString("nombre"));
+                estado.setPuntos(rs.getInt("puntos"));
+                System.out.println(estado);
+                System.out.println("eeeeee");
+                e.add(estado);
+
+            }
+
+            rs.close();
+            ps.close();
+            conexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        }
+        return e;
+    }
+
+    public void updateEstadoJuego(int puntos, int nivel, int vidas) {
+        ConectorBBDD con = new ConectorBBDD();
+        Connection conexion = con.getConexion();
+        int id = cargarIdEstadoJuego(Constants.NOMBRE_ESTADO_JUEGO);
+        try {
+
+            ps = conexion.prepareStatement("UPDATE estadojuego SET puntos =?, nivel=?,vidas=? WHERE idEstadoJuego = '" + id + "';");
+
+            ps.setInt(1, puntos);
+            ps.setInt(2, nivel);
+            ps.setInt(3, vidas);
+
+            ps.executeUpdate();
+
+            rs.close();
+            ps.close();
+            conexion.close();
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+    }
 
 }
-
-
-
