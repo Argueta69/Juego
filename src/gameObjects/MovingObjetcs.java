@@ -36,7 +36,7 @@ public class MovingObjetcs extends GameObject {
 
     //Cargamos sonido de la explosion
     private Sound explosion;
-
+    private Sound blood;
     private Sound coin;
     private Sound live;
 
@@ -50,6 +50,7 @@ public class MovingObjetcs extends GameObject {
         height = texture.getHeight();
         this.gameState = gameState;
         explosion = new Sound(Assets.explosion);
+        blood = new Sound(Assets.blood);
 
     }
 
@@ -195,7 +196,7 @@ public class MovingObjetcs extends GameObject {
 
             //Reproducimos la animación de explosión
             gameState.playBlood(getCenter());
-
+            blood.play();
             //Elimamos los objetos colisionamos
             a.destroy();
             b.destroy();
@@ -206,7 +207,8 @@ public class MovingObjetcs extends GameObject {
 
             //Reproducimos la animación de explosión
             gameState.playExplosion(getCenter());
-
+            explosion.changeVolume(-10.0f);
+            explosion.play();
             //Eliminamos los objetos colisionamos
             a.destroy();
             b.destroy();

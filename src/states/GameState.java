@@ -60,7 +60,7 @@ public class GameState extends State {
     //Lista de mensajes a pintar en pantalla
     private ArrayList<Message> messages = new ArrayList<Message>();
     private int contadorLevel = 0;
-     private int contadorNivel = 0;
+    private int contadorNivel = 0;
     //Música de fondo
     private Sound backgroundMusic;
     private Sound up;
@@ -100,7 +100,7 @@ public class GameState extends State {
             l = new Lives(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.life, this);
             movingObject.add(l);
             cronoVida.run(500);
-            cronoGeneralL.run(10000);
+            cronoGeneralL.run(90000);
         }
 
     }
@@ -110,13 +110,13 @@ public class GameState extends State {
             c = new Coin(new Vector2D(Math.random() * 1280, 450), new Vector2D(0, 0), 0, Assets.coin, this);
             movingObject.add(c);
             cronoMonedas.run(500);
-            cronoGeneralM.run(10000);
+            cronoGeneralM.run(60000);
         }
 
     }
 
     public void createEnemies() {
-     
+
         messages.add(new Message(new Vector2D(Constants.WIDTH / 2, Constants.HEIGHT / 2), false,
                 "LEVEL " + level, Color.WHITE, true, Assets.fontBig, this));
         //Si nivel es mayor que uno cada vez que subamos se reproducira el sonido upLevel
@@ -224,8 +224,9 @@ public class GameState extends State {
 
             }
         }
-        contadorNivel++;
+
         oleadaIzq = 0;
+        contadorNivel++;
     }
 
     public void pasardePantallaAdelante() {
@@ -256,7 +257,7 @@ public class GameState extends State {
 
         //AQUI VA EL CAMBIO DE PANTALLA
         if ((Constants.NEXTPANTALLA == 1)) {
-            System.out.println(Constants.NEXTPANTALLA);
+
             g.drawImage(Assets.background2, 0, 0, null);
 
         }
@@ -301,12 +302,8 @@ public class GameState extends State {
             Animation animation = blood.get(i);
             g2d.drawImage(animation.getCurrentFrame(), (int) animation.getPosition().getX(), (int) animation.getPosition().getY(), null);
         }
-
-            drawLife();
-
-            drawCoins();
- 
-
+        drawLife();
+        drawCoins();
         //Pintamos la puntuación
         drawScore(g);
         //Pintamos las vidas

@@ -61,7 +61,7 @@ public class Assets {
     public static Font fontMed;
 
     //Cargamos sonidos
-    public static Clip backgroundMusic, explosion, playerLoose, playerShoot, ufoShoot, upLevel, coinSound, liveSound;
+    public static Clip backgroundMusic, explosion,blood, playerLoose, playerShoot, ufoShoot, upLevel, coinSound, liveSound;
 
     //Cargamos botones
     public static BufferedImage blueBtn;
@@ -142,6 +142,7 @@ public class Assets {
         //Cargamos los sonidos
         backgroundMusic = loadSound("/sounds/backGroundMusic.wav");
         explosion = loadSound("/sounds/explosion.wav");
+        blood = loadSound("/sounds/blood.wav");
         playerLoose = loadSound("/sounds/playerLoose.wav");
         playerShoot = loadSound("/sounds/playerShoot.wav");
         ufoShoot = loadSound("/sounds/ufoShoot.wav");
