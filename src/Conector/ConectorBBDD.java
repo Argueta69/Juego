@@ -38,8 +38,8 @@ public class ConectorBBDD {
     private ResultSet rs;
 
     public static final String URL = "jdbc:mysql://localhost:3306/jumpwalkergame?allowPublicKeyRetrieval=true&useSSL=false";
-    public static final String USER = "root";
-    public static final String CLAVE = "12345";
+    public static final String USER = "apu";
+    public static final String CLAVE = "apu";
 
     public Connection getConexion() {
 
